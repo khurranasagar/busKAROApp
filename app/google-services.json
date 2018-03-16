@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "465021956460",
+    "firebase_url": "https://buskaro-167.firebaseio.com",
+    "project_id": "buskaro-167",
+    "storage_bucket": "buskaro-167.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465021956460:android:edb4556a0b6b3fa5",
+        "android_client_info": {
+          "package_name": "com.example.sagar.buskaro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465021956460-l893ir045bde22teskv84jvltb7qhnsc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sagar.buskaro",
+            "certificate_hash": "7440781d34d415ceb3ef10f1bf3714a21e0f0396"
+          }
+        },
+        {
+          "client_id": "465021956460-7rm60fe3heiv563tuue0pcpl2unag07g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCX_O0k7ilauaoIHgnVvjlLMptmAev8G8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465021956460-7rm60fe3heiv563tuue0pcpl2unag07g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
