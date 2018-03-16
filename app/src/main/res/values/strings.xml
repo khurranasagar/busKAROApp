@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">busKARO</string>
+    <string name="title_activity_slide">SlideActivity</string>
 </resources>

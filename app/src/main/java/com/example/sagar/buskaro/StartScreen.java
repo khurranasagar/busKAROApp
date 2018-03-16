@@ -17,7 +17,7 @@ public class StartScreen extends AppCompatActivity {
         startbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),SignIn.class);
+                Intent intent = new Intent(v.getContext(),MainActivity.class);
                 startActivity(intent);
             }
         });
