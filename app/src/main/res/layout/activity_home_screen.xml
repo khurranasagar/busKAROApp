@@ -10,21 +10,16 @@ xmlns:android="http://schemas.android.com/apk/res/android" >
     android:layout_height="match_parent"
     tools:context="com.example.sagar.buskaro.HomeScreen" />
 
-<EditText
-    android:id="@+id/editText"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="28dp"
-    android:background="@android:drawable/edit_text"
-    android:ems="10"
-    android:inputType="textPersonName"
-    android:text="Name"
-    android:textColor="@android:color/primary_text_light"
-    android:onClick="ClickSearchBox"
-    android:windowSoftInputMode="stateAlwaysHidden"
-    />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:onClick="ClickSearchBox"
+        android:text="Where to ? " />
 
 
 </RelativeLayout>

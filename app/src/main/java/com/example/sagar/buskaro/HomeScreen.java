@@ -1,52 +1,50 @@
 package com.example.sagar.buskaro;
 
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.common.api.GoogleApi;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import Modules.Users;
 
 public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener  {
 
     private GoogleMap mMap;
+    private DatabaseReference dbr;
 
     private GoogleApiClient client;
+    private FirebaseAuth firebaseauth;
+
+//    FirebaseAuth mAuth;
+
+    FirebaseAuth.AuthStateListener mAuthListener;
 
     private LocationRequest locationRequest;
 
@@ -57,10 +55,14 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     public static final int PERMISSION_REQUEST_LOCATION_CODE = 99;
 
     private View mMapView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+//        mAuth = FirebaseAuth.getInstance();
+        firebaseauth = FirebaseAuth.getInstance();
+        dbr = FirebaseDatabase.getInstance().getReference();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             checkLocationPermission();
@@ -77,6 +79,18 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 30, 150);
         mapFragment.getMapAsync(this);
+
+        writeNewUser();
+
+
+
+    }
+
+
+    private void writeNewUser() {
+        Users us = new Users();
+        FirebaseUser user = firebaseauth.getCurrentUser();
+        dbr.child("users").child(user.getDisplayName()).setValue(us);
     }
 
     @Override
@@ -214,8 +228,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     }
 
     public void ClickSearchBox(View v){
-        //Intent intent = new Intent(this, SearchActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
 }

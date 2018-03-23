@@ -1,0 +1,208 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222454"
+    android:orientation="vertical"
+    tools:context="com.example.sagar.buskaro.MapsActivity">
+
+    <EditText
+        android:id="@+id/etOrigin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/colorWhite"
+        android:hint="Enter origin address"
+        android:textColorHint="@color/colorWhite" />
+
+
+    <EditText
+        android:textColor="@color/colorWhite"
+        android:id="@+id/etDestination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Enter destination address"
+        android:textColorHint="@color/colorWhite" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnFindPath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Find path" />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_distance" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="0 km" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_clock" />
+
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="0 min" />
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="450dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:text="BusKARO"
+            android:textColor="@color/colorWhite"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.257"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:text="BusKARLI"
+            android:textColor="@color/colorWhite"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.757"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="1.0" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <!--<android.support.constraint.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView4"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="TextView"-->
+    <!--map:layout_constraintBottom_toBottomOf="parent"-->
+    <!--map:layout_constraintEnd_toEndOf="parent"-->
+    <!--map:layout_constraintHorizontal_bias="0.435"-->
+    <!--map:layout_constraintStart_toStartOf="parent"-->
+    <!--map:layout_constraintTop_toBottomOf="@+id/textView2"-->
+    <!--map:layout_constraintVertical_bias="0.256" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView3"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="TextView"-->
+    <!--map:layout_constraintBottom_toBottomOf="parent"-->
+    <!--map:layout_constraintEnd_toEndOf="parent"-->
+    <!--map:layout_constraintHorizontal_bias="0.077"-->
+    <!--map:layout_constraintStart_toStartOf="parent"-->
+    <!--map:layout_constraintTop_toBottomOf="@+id/imageView2"-->
+    <!--map:layout_constraintVertical_bias="0.0" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="TextView"-->
+    <!--map:layout_constraintBottom_toBottomOf="parent"-->
+    <!--map:layout_constraintEnd_toEndOf="parent"-->
+    <!--map:layout_constraintHorizontal_bias="0.435"-->
+    <!--map:layout_constraintStart_toStartOf="parent"-->
+    <!--map:layout_constraintTop_toBottomOf="@+id/textView"-->
+    <!--map:layout_constraintVertical_bias="0.047" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="TextView"-->
+    <!--map:layout_constraintBottom_toBottomOf="parent"-->
+    <!--map:layout_constraintEnd_toEndOf="parent"-->
+    <!--map:layout_constraintHorizontal_bias="0.27"-->
+    <!--map:layout_constraintStart_toEndOf="@+id/imageView2"-->
+    <!--map:layout_constraintTop_toTopOf="parent"-->
+    <!--map:layout_constraintVertical_bias="0.287" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/imageView2"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:src="@drawable/sign"-->
+    <!--map:layout_constraintBottom_toBottomOf="parent"-->
+    <!--map:layout_constraintEnd_toEndOf="parent"-->
+    <!--map:layout_constraintHorizontal_bias="0.094"-->
+    <!--map:layout_constraintStart_toStartOf="parent"-->
+    <!--map:layout_constraintTop_toTopOf="parent"-->
+    <!--map:layout_constraintVertical_bias="0.296" />-->
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+</LinearLayout>
+
