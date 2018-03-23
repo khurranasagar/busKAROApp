@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     private Marker currentLocationMarker;
 
     public static final int PERMISSION_REQUEST_LOCATION_CODE = 99;
+    private Button DestButton;
 
     private View mMapView;
 
@@ -72,7 +74,14 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
         mMapView = (View) findViewById(R.id.map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
+        DestButton=(Button)findViewById(R.id.destbutton);
+        DestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),Destinations.class);
+                startActivity(intent);
+            }
+        });
         View locationButton = ((View) mMapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);

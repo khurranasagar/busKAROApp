@@ -2,4 +2,6 @@
     <string name="app_name">busKARO</string>
     <string name="title_activity_slide">SlideActivity</string>
     <string name="title_activity_home_screen">Map</string>
+    <string name="Destination">Destination</string>
+    <string name="NearestStop">Nearest Stop</string>
 </resources>
