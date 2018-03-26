@@ -19,9 +19,9 @@ import java.util.List;
 
 public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder> {
     private Context ctx;
-    private List<Dest> destlist;
+    private List<Object> destlist;
 
-    public DestAdapter(Context ctx, List<Dest> destlist) {
+    public DestAdapter(Context ctx, List<Object> destlist) {
         this.ctx = ctx;
         this.destlist = destlist;
     }
@@ -56,7 +56,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
         switch (holder.getItemViewType()){
             case 0:
 
-                Dest dest=destlist.get(position);
+                final Dest dest=(Dest)destlist.get(position);
                 holder.destname.setText(dest.getDestname());
 
                 holder.destimg.setImageDrawable(ctx.getResources().getDrawable(dest.getImage()));
@@ -64,9 +64,9 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Bus_Routes_Search_Result.class);
-                        intent.putExtra("dest",destlist.get(position).getDestname());
+                        intent.putExtra("dest",dest.getDestname());
 
-                        intent.putExtra("favrecimg",destlist.get(position).getImage());
+                        intent.putExtra("favrecimg",dest.getImage());
                         ctx.startActivity(intent);
 
                     }
@@ -74,17 +74,21 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                 break;
 
             case 1:
-                Dest dest2=destlist.get(position);
-                holder.destname.setText(dest2.getDestname());
+                Dest2 dest2=(Dest2) destlist.get(position);
+                holder.destname.setText(dest2.getDest());
+                holder.busno.setText(dest2.getBusno());
+                holder.startname.setText(dest2.getStart());
 
                 holder.destimg.setImageDrawable(ctx.getResources().getDrawable(dest2.getImage()));
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ctx,Buses.class);
-                        intent.putExtra("dest",destlist.get(position).getDestname());
+                        Intent intent = new Intent(ctx,Bus_Routes_Search_Result.class);
+                        intent.putExtra("dest",((Dest2) destlist.get(position)).getDest());
+                        intent.putExtra("busno",((Dest2) destlist.get(position)).getBusno());
+                        intent.putExtra("favrecimg",((Dest2) destlist.get(position)).getImage());
+                        intent.putExtra("start",((Dest2) destlist.get(position)).getStart());
 
-                        intent.putExtra("favrecimg",destlist.get(position).getImage());
                         ctx.startActivity(intent);
 
                     }
@@ -96,7 +100,9 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if(position>1)
+        if(destlist.get(position) instanceof Dest)
+            return 0;
+        else if(destlist.get(position) instanceof Dest2)
             return 1;
         else
             return 0;
@@ -109,8 +115,11 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
 
     class DestViewHolder extends RecyclerView.ViewHolder{
         ImageView destimg;
-        TextView destname;
+        TextView destname,startname,busno;
         CardView cardView;
+
+
+
         public DestViewHolder(View itemView, int viewType) {
             super(itemView);
             if(viewType==0)
@@ -122,16 +131,18 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
             else if(viewType==1)
             {
                 destimg=itemView.findViewById(R.id.desticon2);
-                destname=itemView.findViewById(R.id.destname2);
+                busno=itemView.findViewById(R.id.destname2);
                 cardView = itemView.findViewById(R.id.dest_card2);
+                startname = itemView.findViewById(R.id.start);
+                destname = itemView.findViewById(R.id.end);
             }
 
 
         }
     }
-    public void setfilter(List<Dest> filteredDests){
+    public void setfilter(List<Object> filteredDests){
 
-        destlist  = new ArrayList<Dest>();
+        destlist  = new ArrayList<Object>();
         destlist.addAll(filteredDests);
         notifyDataSetChanged();
 

@@ -14,7 +14,7 @@ import java.util.List;
 public class Destinations extends AppCompatActivity {
     RecyclerView recyclerView2;
     DestAdapter adapter2;
-    List<Dest> destlist;
+    List<Object> destlist;
     SearchView searchView;
 
 
@@ -37,9 +37,11 @@ public class Destinations extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                final List<Dest> FilteredList = new ArrayList<Dest>();
+                final List<Object> FilteredList = new ArrayList<Object>();
                 FilteredList.add(new Dest(R.drawable.clock,"Kalkaji Mandir"));
                 FilteredList.add( new Dest(R.drawable.clock,"Nehru Place"));
+                FilteredList.add(new Dest2(R.drawable.clock,"Kalkaji Mandir","511A","Dhaula Kuan"));
+                FilteredList.add(new Dest2(R.drawable.clock,"Kalkaji Mandir","611A","Dhaula Kuan"));
                 adapter2.setfilter(FilteredList);
                 return false;
             }
@@ -61,6 +63,12 @@ public class Destinations extends AppCompatActivity {
         );
         destlist.add(
                 new Dest(R.drawable.favorite2,"Greater Kailash")
+        );
+        destlist.add(
+                new Dest2(R.drawable.clock,"Rajiv Chowk","511A","Dhaula Kuan")
+        );
+        destlist.add(
+                new Dest2(R.drawable.favorite2,"Rajiv Chowk","611A","Dhaula Kuan")
         );
 
         adapter2 = new DestAdapter(this, destlist);
