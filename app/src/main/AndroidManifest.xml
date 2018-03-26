@@ -59,6 +59,7 @@
         <activity
             android:name=".Bus_Routes_Search_Result"
             android:label="@string/title_activity_bus__routes__search__result"></activity>
+        <activity android:name=".Buses"></activity>
     </application>
 
 </manifest>
