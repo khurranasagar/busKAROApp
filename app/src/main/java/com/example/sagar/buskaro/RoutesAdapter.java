@@ -28,8 +28,9 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RouteViewH
     @Override
     public RoutesAdapter.RouteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.dest_card1, null);
+        View view = inflater.inflate(R.layout.bus_routes_search_layout, null);
         return new RoutesAdapter.RouteViewHolder(view);
+
     }
 
     @Override
@@ -48,8 +49,9 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RouteViewH
         TextView End_Destination;
         public RouteViewHolder(View itemView) {
             super(itemView);
-
-
+            ETA = (TextView)itemView.findViewById(R.id.EtaTime);
+            BusName = (TextView) itemView.findViewById(R.id.Busno);
+            End_Destination = (TextView) itemView.findViewById(R.id.EndDestination);
         }
     }
 

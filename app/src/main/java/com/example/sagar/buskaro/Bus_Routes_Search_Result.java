@@ -12,6 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapReadyCallback {
@@ -24,11 +25,17 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bus__routes__search__result);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
-
-        SearchResultsRecyclerView = (RecyclerView) findViewById(R.id.destrec);
+        SearchResultsRecyclerView = (RecyclerView) findViewById(R.id.routesoptions);
         SearchResultsRecyclerView.setHasFixedSize(true);
         SearchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        routes_names = new ArrayList<String>();
 
         routes_names.add("Sagar Khurana");
         routes_names.add("Abhijeet Singh");
@@ -38,11 +45,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         //setting adapter to recyclerview
         SearchResultsRecyclerView.setAdapter(adapter2);
 
-        setContentView(R.layout.activity_bus__routes__search__result);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
     }
 
 

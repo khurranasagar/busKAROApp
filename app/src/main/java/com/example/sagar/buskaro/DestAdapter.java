@@ -63,7 +63,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ctx,Buses.class);
+                        Intent intent = new Intent(ctx,Bus_Routes_Search_Result.class);
                         intent.putExtra("dest",destlist.get(position).getDestname());
 
                         intent.putExtra("favrecimg",destlist.get(position).getImage());
