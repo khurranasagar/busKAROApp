@@ -27,7 +27,13 @@ public class Destinations extends AppCompatActivity {
                 new Dest(R.drawable.clock,"Lajpat Nagar")
         );
         destlist.add(
-                new Dest(R.drawable.clock,"Lajpat Nagar")
+                new Dest(R.drawable.favorite2,"Kalkaji Mandir")
+        );
+        destlist.add(
+                new Dest(R.drawable.clock,"Kailash Colony")
+        );
+        destlist.add(
+                new Dest(R.drawable.favorite2,"Greater Kailash")
         );
 
         adapter2 = new DestAdapter(this, destlist);
