@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:padding="4dp">
 
             <ImageView
@@ -53,11 +53,42 @@
 
             <View
                 android:layout_width="330dp"
+                android:id="@+id/horline"
                 android:layout_marginTop="5dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="2dp"
                 android:layout_below="@+id/towards"
                 android:background="#c0c0c0"/>
+            <View
+                android:id="@+id/vertline"
+                android:layout_below="@+id/horline"
+                android:layout_width="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="fill_parent"
+                android:background="#c0c0c0"/>
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horline"
+                android:layout_toLeftOf="@+id/vertline"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="DHAULA KUAN"
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horline"
+                android:layout_toRightOf="@+id/vertline"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="BADARPUR"
+                android:textColor="#000000" />
 
 
 

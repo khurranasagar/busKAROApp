@@ -73,7 +73,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                 });
                 break;
 
-            case 2:
+            case 1:
                 Dest dest2=destlist.get(position);
                 holder.destname.setText(dest2.getDestname());
 
