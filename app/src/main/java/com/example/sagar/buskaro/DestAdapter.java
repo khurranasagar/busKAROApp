@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -127,6 +128,13 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
 
 
         }
+    }
+    public void setfilter(List<Dest> filteredDests){
+
+        destlist  = new ArrayList<Dest>();
+        destlist.addAll(filteredDests);
+        notifyDataSetChanged();
+
     }
 
 }
