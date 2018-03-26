@@ -2,4 +2,9 @@
     <string name="app_name">busKARO</string>
     <string name="title_activity_slide">SlideActivity</string>
     <string name="title_activity_home_screen">Map</string>
+    <string name="app_label">busKARO</string>
+    <string name="end_destination_search_hint">Destination</string>
+    <string name="Destination">Destination</string>
+    <string name="NearestStop">Nearest Stop</string>
+    <string name="title_activity_bus__routes__search__result">Map</string>
 </resources>

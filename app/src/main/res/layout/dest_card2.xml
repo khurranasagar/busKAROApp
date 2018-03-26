@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/dest_card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_margin="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/desticon2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/destname2"
+                android:padding="4dp"
+                android:src="@drawable/favorite2" />
+
+            <TextView
+                android:id="@+id/destname2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:layout_toRightOf="@+id/desticon2"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="511A"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/towards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/destname2"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="towards"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="330dp"
+                android:id="@+id/horline"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="2dp"
+                android:layout_below="@+id/towards"
+                android:background="#c0c0c0"/>
+            <View
+                android:id="@+id/vertline"
+                android:layout_below="@+id/horline"
+                android:layout_width="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="fill_parent"
+                android:background="#c0c0c0"/>
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horline"
+                android:layout_toLeftOf="@+id/vertline"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="DHAULA KUAN"
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horline"
+                android:layout_toRightOf="@+id/vertline"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="BADARPUR"
+                android:textColor="#000000" />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
