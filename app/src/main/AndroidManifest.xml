@@ -47,7 +47,18 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_home_screen"
             android:parentActivityName=".HomeScreen" />
-        <activity android:name=".Destinations"></activity>
+        <activity android:name=".Destinations">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/destinationscreensearchable" />
+        </activity>
+        <activity
+            android:name=".Bus_Routes_Search_Result"
+            android:label="@string/title_activity_bus__routes__search__result"></activity>
     </application>
 
 </manifest>

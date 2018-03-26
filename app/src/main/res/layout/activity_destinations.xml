@@ -44,7 +44,7 @@
                     android:baselineAlignBottom="true"
                     app:srcCompat="@drawable/current" />
 
-                <EditText
+                <android.support.v7.widget.SearchView
                     android:id="@+id/neareststop"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -55,7 +55,20 @@
                     android:drawableLeft="@drawable/search"
                     android:gravity="center"
                     android:hint="@string/NearestStop"
-                    android:textAlignment="center"></EditText>
+                    android:textAlignment="center"></android.support.v7.widget.SearchView>
+
+                <!--<EditText-->
+                    <!--android:id="@+id/neareststop"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginRight="40dp"-->
+                    <!--android:background="@drawable/login_edittext"-->
+                    <!--android:drawableLeft="@drawable/search"-->
+                    <!--android:gravity="center"-->
+                    <!--android:hint="@string/NearestStop"-->
+                    <!--android:textAlignment="center"></EditText>-->
 
 
             </LinearLayout>
@@ -73,7 +86,7 @@
                 android:baselineAlignBottom="true"
                 app:srcCompat="@drawable/destmark" />
 
-            <EditText
+            <android.support.v7.widget.SearchView
                 android:id="@+id/destination"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -83,7 +96,19 @@
                 android:drawableLeft="@drawable/search"
                 android:gravity="center"
                 android:hint="@string/Destination"
-                android:textAlignment="center"></EditText>
+                android:textAlignment="center"></android.support.v7.widget.SearchView>
+
+            <!--<EditText-->
+                <!--android:id="@+id/destination"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:background="@drawable/login_edittext"-->
+                <!--android:drawableLeft="@drawable/search"-->
+                <!--android:gravity="center"-->
+                <!--android:hint="@string/Destination"-->
+                <!--android:textAlignment="center"></EditText>-->
 
         </LinearLayout>
 
