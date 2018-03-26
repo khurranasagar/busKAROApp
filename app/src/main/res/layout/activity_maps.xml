@@ -77,7 +77,7 @@
         android:id="@+id/rv"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="450dp" />
+        android:layout_height="300dp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -101,6 +101,7 @@
             map:layout_constraintVertical_bias="1.0" />
 
         <Button
+            android:id="@+id/buskarli"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -115,6 +116,11 @@
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
             map:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/busnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
     </android.support.constraint.ConstraintLayout>

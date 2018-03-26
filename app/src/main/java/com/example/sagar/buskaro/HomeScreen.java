@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -29,9 +30,23 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import Modules.BusRoutes;
+import Modules.BusStop;
 import Modules.Users;
 
 public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener  {
@@ -42,11 +57,14 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     private GoogleApiClient client;
     private FirebaseAuth firebaseauth;
 
+    public String key;
+
 //    FirebaseAuth mAuth;
 
     FirebaseAuth.AuthStateListener mAuthListener;
 
     private LocationRequest locationRequest;
+    public DatabaseReference pass;
 
     private Location lastlocation;
 
@@ -60,15 +78,12 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-//        mAuth = FirebaseAuth.getInstance();
         firebaseauth = FirebaseAuth.getInstance();
         dbr = FirebaseDatabase.getInstance().getReference();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             checkLocationPermission();
         }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
         mMapView = (View) findViewById(R.id.map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -81,13 +96,124 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
         mapFragment.getMapAsync(this);
 
         writeNewUser();
-
+        try {
+            writeNewRoutes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
+    private void writeNewRoutes() throws IOException
+    {
+
+        dbr = FirebaseDatabase.getInstance().getReference();
+        InputStream is = getResources().openRawResource(R.raw.buskaro);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+        String line;
+        String bus_numbers[] = new String[10];
+            if ((line = reader.readLine())!=null)
+            {
+                bus_numbers = line.split(",");
+
+                for(int i=0;i<9;i++)
+                {
+                    BusRoutes br = new BusRoutes();
+                    br.total_stations = 1;
+                    BusStop bs =  new BusStop();
+                    br.stations = new ArrayList<>();
+//                    Log.d("BusNumber", "writeBusNumber : " + bus_numbers[i]);
+                    br.bus_number=bus_numbers[i];
+                    bs.name_of_bus_stop = "nothing";
+                    bs.coordinate =new LatLng(0,0);
+                    br.stations.add(0,bs);
+                    dbr.child("bus_routes_database").child(bus_numbers[i]).setValue(br);
+                }
+
+             }
+
+            String[] test = new String[100];
+            int index=0;
+            while ((line = reader.readLine())!=null )
+            {
+                final String names[]= line.split(",");
+                test[index++]=names[7];
+                for(int j=0;j<9;j++)
+                {
+                    final int temp = j ;
+
+                    DatabaseReference rf = dbr.child("bus_routes_database").child(bus_numbers[j]);
+
+                    rf.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            List<BusStop> br = new ArrayList<>();
+                            br = (List<BusStop>) dataSnapshot.child("stations").getValue();
+                            long no_of_stations = (long) dataSnapshot.child("total_stations").getValue();
+                            int tempp = (int) no_of_stations;
+//                            Log.d("LENGTH OF BR", "Length : " + br.size() + " " + tempp );
+                            BusStop bs = new BusStop();
+                            bs.name_of_bus_stop = names[temp];
+                            bs.coordinate = new LatLng(0,0);
+
+                            if(tempp< br.size())
+                            {
+                                br.add(tempp,bs);
+//                                Log.d("LENGTH OF BR", "Length : " + br.size());
+                            }
+
+                            tempp = tempp + 1;
+//                            Log.d("Updated tempp value", "onDataChange: " + tempp);
+                            dataSnapshot.child("total_stations").getRef().setValue(tempp);
+                            dataSnapshot.child("stations").getRef().setValue(br);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+//                    Log.d("END WHILE", "WHILE HAS ENDED HERE ----------------");
+
+                }
+
+            }
+
+            BusRoutes br = new BusRoutes();
+            br.stations = new ArrayList<>();
+            br.bus_number="445A";
+            br.total_stations=0;
+            int k=0;
+            for ( String name : test)
+            {
+
+//                Log.d("445A", "writeNewRoutes: " +name );
+                if( name!=null && !(name.equalsIgnoreCase("empty")))
+                {
+                    BusStop bs = new BusStop();
+                    bs.coordinate = new LatLng(0,0);
+                    bs.name_of_bus_stop=name;
+                    br.stations.add(k++,bs);
+                    br.total_stations++;
+                }
+            }
+
+//        Log.d("LENGTH", "Length of 445A : " + br.stations.size());
+        DatabaseReference hello ;
+        hello  = dbr.child("bus_routes_database").child(br.bus_number).push();
+        key=hello.getKey();
+
+        hello.setValue(br);
+
+    }
 
     private void writeNewUser() {
+        dbr = FirebaseDatabase.getInstance().getReference();
         Users us = new Users();
         FirebaseUser user = firebaseauth.getCurrentUser();
         dbr.child("users").child(user.getDisplayName()).setValue(us);
@@ -229,6 +355,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
 
     public void ClickSearchBox(View v){
         Intent intent = new Intent(this, MapsActivity.class);
+        Log.d(" ket in homescreen", "ClickSearchBox: " + key);
+        intent.putExtra("EXTRA_SESSION_ID", key);
         startActivity(intent);
     }
 
