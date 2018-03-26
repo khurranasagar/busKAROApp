@@ -47,7 +47,8 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_home_screen"
             android:parentActivityName=".HomeScreen" />
-        <activity android:name=".Destinations"></activity>
+        <activity android:name=".Destinations" />
+        <activity android:name=".Buses"></activity>
     </application>
 
 </manifest>

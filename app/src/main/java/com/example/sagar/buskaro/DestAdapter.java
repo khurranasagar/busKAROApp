@@ -14,11 +14,11 @@ import java.util.List;
  * Created by Harshit Verma on 23-03-2018.
  */
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class DestAdapter extends RecyclerView.Adapter<DestAdapter.ProductViewHolder> {
     private Context ctx;
-    private List<Product> destlist;
+    private List<Dest> destlist;
 
-    public ProductAdapter(Context ctx, List<Product> destlist) {
+    public DestAdapter(Context ctx, List<Dest> destlist) {
         this.ctx = ctx;
         this.destlist = destlist;
     }
@@ -26,13 +26,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(ctx);
-        View view = inflater.inflate(R.layout.list_layout, null);
+        View view = inflater.inflate(R.layout.dest_card1, null);
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        Product prod=destlist.get(position);
+        Dest prod=destlist.get(position);
         holder.destname.setText(prod.getDestname());
 
         holder.destimg.setImageDrawable(ctx.getResources().getDrawable(prod.getImage()));
