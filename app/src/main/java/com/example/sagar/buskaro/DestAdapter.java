@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import Modules.BusRoutes;
+
 /**
  * Created by Harshit Verma on 23-03-2018.
  */
@@ -57,14 +59,14 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
             case 0:
 
                 final Dest dest=(Dest)destlist.get(position);
-                holder.destname.setText(dest.getDestname());
+                holder.destname.setText(dest.getBusStop().getStopname());
 
                 holder.destimg.setImageDrawable(ctx.getResources().getDrawable(dest.getImage()));
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Bus_Routes_Search_Result.class);
-                        intent.putExtra("dest",dest.getDestname());
+                        intent.putExtra("dest",dest.getBusStop().getStopname());
 
                         intent.putExtra("favrecimg",dest.getImage());
                         ctx.startActivity(intent);
@@ -75,20 +77,16 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
 
             case 1:
                 Dest2 dest2=(Dest2) destlist.get(position);
-                holder.destname.setText(dest2.getDest());
-                holder.busno.setText(dest2.getBusno());
-                holder.startname.setText(dest2.getStart());
+                BusRoutes route = dest2.getBusRoute();
+                holder.destname.setText(route.getDestination());
+                holder.busno.setText(route.getBus_number());
+                holder.startname.setText(route.getOrigin());
 
                 holder.destimg.setImageDrawable(ctx.getResources().getDrawable(dest2.getImage()));
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Route_Description.class);
-                        intent.putExtra("dest",((Dest2) destlist.get(position)).getDest());
-                        intent.putExtra("busno",((Dest2) destlist.get(position)).getBusno());
-                        intent.putExtra("favrecimg",((Dest2) destlist.get(position)).getImage());
-                        intent.putExtra("start",((Dest2) destlist.get(position)).getStart());
-
                         ctx.startActivity(intent);
 
                     }

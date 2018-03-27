@@ -11,14 +11,42 @@ public class BusRoutes {
 
     public String bus_number;
     public List<BusStop> stations;
-    public int total_stations;
+    public List<String> ETAs;
 
-    public void BusRoutes()
+    public BusRoutes(String bus_number)
     {
-        stations =  new ArrayList<>();
-        total_stations=1;
-
+        this.bus_number = bus_number;
+        this.stations = new ArrayList<BusStop>();
+        this.ETAs = new ArrayList<String>();
     }
+
+    public String getBus_number(){
+        return bus_number;
+    }
+
+    public void setStations(List<BusStop> stations){
+        this.stations = stations;
+    }
+
+    public String getOrigin(){
+        if(stations.size() > 1) {
+            return stations.get(0).getStopname();
+        }
+        else{
+            return "Deafault Station";
+        }
+    }
+
+    public String getDestination(){
+        if(stations.size() > 1) {
+            return stations.get(stations.size() - 1).getStopname();
+        }
+        else{
+            return "Deafault Station";
+        }
+    }
+
+
 
 
 }

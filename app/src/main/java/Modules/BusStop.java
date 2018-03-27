@@ -11,4 +11,12 @@ public class BusStop {
     public String name_of_bus_stop;
     public LatLng coordinate;
 
+    public BusStop(String stop_name){
+        this.name_of_bus_stop = stop_name;
+    }
+
+    public String getStopname(){
+        return name_of_bus_stop;
+    }
+
 }

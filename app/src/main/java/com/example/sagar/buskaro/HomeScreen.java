@@ -58,7 +58,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     private GoogleApiClient client;
     private FirebaseAuth firebaseauth;
 
-    public String key;
+    public String key = "-L8auraKaIA5Xvr_Ak3x";
 
 //    FirebaseAuth mAuth;
 
@@ -94,6 +94,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(),Destinations.class);
+                intent.putExtra("EXTRA_SESSION_ID", key);
                 startActivity(intent);
             }
         });
@@ -105,121 +106,119 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
         mapFragment.getMapAsync(this);
 
         writeNewUser();
-        /*try {
-            writeNewRoutes();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
+//        try {
+//            writeNewRoutes();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
-    private void writeNewRoutes() throws IOException
-    {
-
-        dbr = FirebaseDatabase.getInstance().getReference();
-        InputStream is = getResources().openRawResource(R.raw.buskaro);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8"))
-        );
-        String line;
-        String bus_numbers[] = new String[10];
-            if ((line = reader.readLine())!=null)
-            {
-                bus_numbers = line.split(",");
-
-                for(int i=0;i<9;i++)
-                {
-                    BusRoutes br = new BusRoutes();
-                    br.total_stations = 1;
-                    BusStop bs =  new BusStop();
-                    br.stations = new ArrayList<>();
-//                    Log.d("BusNumber", "writeBusNumber : " + bus_numbers[i]);
-                    br.bus_number=bus_numbers[i];
-                    bs.name_of_bus_stop = "nothing";
-                    bs.coordinate =new LatLng(0,0);
-                    br.stations.add(0,bs);
-                    dbr.child("bus_routes_database").child(bus_numbers[i]).setValue(br);
-                }
-
-             }
-
-            String[] test = new String[100];
-            int index=0;
-            while ((line = reader.readLine())!=null )
-            {
-                final String names[]= line.split(",");
-                test[index++]=names[7];
-                for(int j=0;j<9;j++)
-                {
-                    final int temp = j ;
-
-                    DatabaseReference rf = dbr.child("bus_routes_database").child(bus_numbers[j]);
-
-                    rf.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            List<BusStop> br = new ArrayList<>();
-                            br = (List<BusStop>) dataSnapshot.child("stations").getValue();
-                            long no_of_stations = (long) dataSnapshot.child("total_stations").getValue();
-                            int tempp = (int) no_of_stations;
-//                            Log.d("LENGTH OF BR", "Length : " + br.size() + " " + tempp );
-                            BusStop bs = new BusStop();
-                            bs.name_of_bus_stop = names[temp];
-                            bs.coordinate = new LatLng(0,0);
-
-                            if(tempp< br.size())
-                            {
-                                br.add(tempp,bs);
-//                                Log.d("LENGTH OF BR", "Length : " + br.size());
-                            }
-
-                            tempp = tempp + 1;
-//                            Log.d("Updated tempp value", "onDataChange: " + tempp);
-                            dataSnapshot.child("total_stations").getRef().setValue(tempp);
-                            dataSnapshot.child("stations").getRef().setValue(br);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-//                    Log.d("END WHILE", "WHILE HAS ENDED HERE ----------------");
-
-                }
-
-            }
-
-            BusRoutes br = new BusRoutes();
-            br.stations = new ArrayList<>();
-            br.bus_number="445A";
-            br.total_stations=0;
-            int k=0;
-            for ( String name : test)
-            {
-
-//                Log.d("445A", "writeNewRoutes: " +name );
-                if( name!=null && !(name.equalsIgnoreCase("empty")))
-                {
-                    BusStop bs = new BusStop();
-                    bs.coordinate = new LatLng(0,0);
-                    bs.name_of_bus_stop=name;
-                    br.stations.add(k++,bs);
-                    br.total_stations++;
-                }
-            }
-
-//        Log.d("LENGTH", "Length of 445A : " + br.stations.size());
-        DatabaseReference hello ;
-        hello  = dbr.child("bus_routes_database").child(br.bus_number).push();
-        key=hello.getKey();
-
-        hello.setValue(br);
-
-    }
+//    private void writeNewRoutes() throws IOException
+//    {
+//
+//        dbr = FirebaseDatabase.getInstance().getReference();
+//        InputStream is = getResources().openRawResource(R.raw.buskaro);
+//        BufferedReader reader = new BufferedReader(
+//                new InputStreamReader(is, Charset.forName("UTF-8"))
+//        );
+//        String line;
+//        String bus_numbers[] = new String[10];
+//            if ((line = reader.readLine())!=null)
+//            {
+//                bus_numbers = line.split(",");
+//
+//                for(int i=0;i<9;i++)
+//                {
+//                    BusRoutes br = new BusRoutes();
+//                    br.total_stations = 1;
+//                    BusStop bs =  new BusStop();
+//                    br.stations = new ArrayList<>();
+////                    Log.d("BusNumber", "writeBusNumber : " + bus_numbers[i]);
+//                    br.bus_number=bus_numbers[i];
+//                    bs.name_of_bus_stop = "nothing";
+//                    bs.coordinate =new LatLng(0,0);
+//                    br.stations.add(0,bs);
+//                    dbr.child("bus_routes_database").child(bus_numbers[i]).setValue(br);
+//                }
+//
+//             }
+//
+//            String[] test = new String[100];
+//            int index=0;
+//            while ((line = reader.readLine())!=null )
+//            {
+//                final String names[]= line.split(",");
+//                test[index++]=names[7];
+//                for(int j=0;j<9;j++)
+//                {
+//                    final int temp = j ;
+//
+//                    DatabaseReference rf = dbr.child("bus_routes_database").child(bus_numbers[j]);
+//
+//                    rf.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            List<BusStop> br = new ArrayList<>();
+//                            br = (List<BusStop>) dataSnapshot.child("stations").getValue();
+//                            long no_of_stations = (long) dataSnapshot.child("total_stations").getValue();
+//                            int tempp = (int) no_of_stations;
+////                            Log.d("LENGTH OF BR", "Length : " + br.size() + " " + tempp );
+//                            BusStop bs = new BusStop();
+//                            bs.name_of_bus_stop = names[temp];
+//                            bs.coordinate = new LatLng(0,0);
+//
+//                            if(tempp< br.size())
+//                            {
+//                                br.add(tempp,bs);
+////                                Log.d("LENGTH OF BR", "Length : " + br.size());
+//                            }
+//
+//                            tempp = tempp + 1;
+////                            Log.d("Updated tempp value", "onDataChange: " + tempp);
+//                            dataSnapshot.child("total_stations").getRef().setValue(tempp);
+//                            dataSnapshot.child("stations").getRef().setValue(br);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+//
+////                    Log.d("END WHILE", "WHILE HAS ENDED HERE ----------------");
+//
+//                }
+//
+//            }
+//
+//            BusRoutes br = new BusRoutes();
+//            br.stations = new ArrayList<>();
+//            br.bus_number="445A";
+//            br.total_stations=0;
+//            int k=0;
+//            for ( String name : test)
+//            {
+//
+////                Log.d("445A", "writeNewRoutes: " +name );
+//                if( name!=null && !(name.equalsIgnoreCase("empty")))
+//                {
+//                    BusStop bs = new BusStop();
+//                    bs.coordinate = new LatLng(0,0);
+//                    bs.name_of_bus_stop=name;
+//                    br.stations.add(k++,bs);
+//                    br.total_stations++;
+//                }
+//            }
+//
+////        Log.d("LENGTH", "Length of 445A : " + br.stations.size());
+//        DatabaseReference hello ;
+//        hello  = dbr.child("bus_routes_database").child(br.bus_number).push();
+//        key=hello.getKey();
+//
+//        hello.setValue(br);
+//
+//    }
 
     private void writeNewUser() {
         dbr = FirebaseDatabase.getInstance().getReference();
@@ -363,7 +362,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     }
 
     public void ClickSearchBox(View v){
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, Destinations.class);
         Log.d(" ket in homescreen", "ClickSearchBox: " + key);
         intent.putExtra("EXTRA_SESSION_ID", key);
         startActivity(intent);

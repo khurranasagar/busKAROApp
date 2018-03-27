@@ -1,214 +1,125 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll"
-    android:layout_width="match_parent"
+<RelativeLayout
     android:layout_height="match_parent"
-    android:background="#222454"
-    android:orientation="vertical"
-    tools:context="com.example.sagar.buskaro.MapsActivity">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <EditText
-        android:id="@+id/etOrigin"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map2"
+        android:layout_alignParentTop="true"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        tools:context="com.example.sagar.buskaro.MapsActivity" />
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textColor="@color/colorWhite"
-        android:hint="Enter origin address"
-        android:textColorHint="@color/colorWhite" />
+        android:id="@+id/routedesc_card"
+        android:layout_below="@+id/map2"
+        android:layout_margin="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/Busno2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="445A"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/EndDestination2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/Busno2"
+                android:text="Humdard Nagar"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/ETAtext2"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="40dp"
+                android:text="ETA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/EtaTime2"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:text="2 min"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
 
 
-    <EditText
-        android:textColor="@color/colorWhite"
-        android:id="@+id/etDestination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="Enter destination address"
-        android:textColorHint="@color/colorWhite" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@color/colorWhite"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnFindPath"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Find path" />
-
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_distance" />
-
-        <TextView
-            android:id="@+id/tvDistance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="0 km" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_clock" />
-
-        <TextView
-            android:id="@+id/tvDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="0 min" />
-
-
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:id="@+id/routedesc_recview"
+        android:layout_marginBottom="100dp"
+        android:layout_below="@+id/routedesc_card"
+        android:layout_height="match_parent" >
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/buskaro"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@android:drawable/screen_background_light_transparent"
-            android:text="BusKARO"
-            android:textColor="@color/colorWhite"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.257"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            android:id="@+id/buskarli"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@android:drawable/screen_background_light_transparent"
-            android:text="BusKARLI"
-            android:textColor="@color/colorWhite"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.757"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/busnumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_marginLeft="5dp"
+        android:background="@color/neworange"
+        android:drawableLeft="@drawable/busfront2"
+        android:drawablePadding="-15sp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="busKARO"
+        android:textAllCaps="false"
+        android:elevation="20px"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+    <Button
+        android:id="@+id/buskarli"
+        android:layout_width="165dp"
+        android:elevation="20px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/neworange"
+        android:drawableLeft="@drawable/busfront2"
+        android:drawablePadding="-15sp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="busKARLI"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
 
-    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>
 
-    <!--<android.support.constraint.ConstraintLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView4"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:text="TextView"-->
-    <!--map:layout_constraintBottom_toBottomOf="parent"-->
-    <!--map:layout_constraintEnd_toEndOf="parent"-->
-    <!--map:layout_constraintHorizontal_bias="0.435"-->
-    <!--map:layout_constraintStart_toStartOf="parent"-->
-    <!--map:layout_constraintTop_toBottomOf="@+id/textView2"-->
-    <!--map:layout_constraintVertical_bias="0.256" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView3"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:text="TextView"-->
-    <!--map:layout_constraintBottom_toBottomOf="parent"-->
-    <!--map:layout_constraintEnd_toEndOf="parent"-->
-    <!--map:layout_constraintHorizontal_bias="0.077"-->
-    <!--map:layout_constraintStart_toStartOf="parent"-->
-    <!--map:layout_constraintTop_toBottomOf="@+id/imageView2"-->
-    <!--map:layout_constraintVertical_bias="0.0" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:text="TextView"-->
-    <!--map:layout_constraintBottom_toBottomOf="parent"-->
-    <!--map:layout_constraintEnd_toEndOf="parent"-->
-    <!--map:layout_constraintHorizontal_bias="0.435"-->
-    <!--map:layout_constraintStart_toStartOf="parent"-->
-    <!--map:layout_constraintTop_toBottomOf="@+id/textView"-->
-    <!--map:layout_constraintVertical_bias="0.047" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:text="TextView"-->
-    <!--map:layout_constraintBottom_toBottomOf="parent"-->
-    <!--map:layout_constraintEnd_toEndOf="parent"-->
-    <!--map:layout_constraintHorizontal_bias="0.27"-->
-    <!--map:layout_constraintStart_toEndOf="@+id/imageView2"-->
-    <!--map:layout_constraintTop_toTopOf="parent"-->
-    <!--map:layout_constraintVertical_bias="0.287" />-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/imageView2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:src="@drawable/sign"-->
-    <!--map:layout_constraintBottom_toBottomOf="parent"-->
-    <!--map:layout_constraintEnd_toEndOf="parent"-->
-    <!--map:layout_constraintHorizontal_bias="0.094"-->
-    <!--map:layout_constraintStart_toStartOf="parent"-->
-    <!--map:layout_constraintTop_toTopOf="parent"-->
-    <!--map:layout_constraintVertical_bias="0.296" />-->
-    <!--</android.support.constraint.ConstraintLayout>-->
-
-</LinearLayout>
 
