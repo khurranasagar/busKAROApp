@@ -1,0 +1,73 @@
+package com.example.sagar.buskaro;
+
+import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Route_Description extends FragmentActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+    RecyclerView recyclerView;
+    RouteDescAdapter adapter;
+    List<Routedesc_getters> routedescgettersList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_route__description);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map2);
+        mapFragment.getMapAsync(this);
+
+
+        routedescgettersList =new ArrayList<>();
+
+        recyclerView = findViewById(R.id.routedesc_recview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        routedescgettersList.add(new Routedesc_getters("OKHLA",R.drawable.gps));
+        routedescgettersList.add(new Routedesc_getters("GOVIND PURI",R.drawable.stops));
+        routedescgettersList.add(new Routedesc_getters("KALKAJI MANDIR",R.drawable.stops));
+        routedescgettersList.add(new Routedesc_getters("GOVIND PURI",R.drawable.stops));
+        routedescgettersList.add(new Routedesc_getters("KALKAJI MANDIR",R.drawable.stops));
+        routedescgettersList.add(new Routedesc_getters("DHAULA KUAN",R.drawable.finaldest));
+
+        adapter = new RouteDescAdapter(this, routedescgettersList);
+
+        //setting adapter to recyclerview
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+}
