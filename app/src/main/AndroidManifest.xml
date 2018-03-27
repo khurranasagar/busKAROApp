@@ -58,8 +58,11 @@
         </activity>
         <activity
             android:name=".Bus_Routes_Search_Result"
-            android:label="@string/title_activity_bus__routes__search__result"></activity>
-        <activity android:name=".Buses"></activity>
+            android:label="@string/title_activity_bus__routes__search__result" />
+        <activity android:name=".Buses" />
+        <activity
+            android:name=".Route_Description"
+            android:label="@string/title_activity_route__description"></activity>
     </application>
 
 </manifest>

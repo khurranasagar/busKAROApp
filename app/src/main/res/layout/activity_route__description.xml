@@ -1,0 +1,124 @@
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map2"
+        android:layout_alignParentTop="true"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        tools:context="com.example.sagar.buskaro.Route_Description" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/routedesc_card"
+        android:layout_below="@+id/map2"
+        android:layout_margin="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/Busno2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentTop="true"
+                android:textSize="20sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="445A"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/EndDestination2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/Busno2"
+                android:text="Humdard Nagar"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/ETAtext2"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="40dp"
+                android:text="ETA"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/EtaTime2"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:text="2 min"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:id="@+id/routedesc_recview"
+        android:layout_marginBottom="100dp"
+        android:layout_below="@+id/routedesc_card"
+        android:layout_height="match_parent" >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="165dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+
+        android:layout_marginLeft="5dp"
+        android:background="@color/neworange"
+        android:drawableLeft="@drawable/busfront2"
+        android:drawablePadding="-15sp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="busKARO"
+        android:textAllCaps="false"
+        android:elevation="20px"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="165dp"
+        android:elevation="20px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+
+        android:layout_marginRight="5dp"
+        android:background="@color/neworange"
+        android:drawableLeft="@drawable/busfront2"
+        android:drawablePadding="-15sp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="busKARLI"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+
+
+</RelativeLayout>

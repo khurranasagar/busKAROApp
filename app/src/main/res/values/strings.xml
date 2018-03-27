@@ -7,4 +7,5 @@
     <string name="Destination">Destination</string>
     <string name="NearestStop">Nearest Stop</string>
     <string name="title_activity_bus__routes__search__result">Map</string>
+    <string name="title_activity_route__description">Map</string>
 </resources>
