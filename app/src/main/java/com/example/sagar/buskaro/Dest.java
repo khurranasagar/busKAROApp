@@ -1,23 +1,25 @@
 package com.example.sagar.buskaro;
 
+import Modules.BusStop;
+
 /**
  * Created by Harshit Verma on 23-03-2018.
  */
 
 public class Dest {
     private int image;
-    private String destname;
+    private BusStop stop;
 
-    public Dest(int image, String destname) {
+    public Dest(int image, BusStop destname) {
         this.image = image;
-        this.destname = destname;
+        this.stop = destname;
     }
 
     public int getImage() {
         return image;
     }
 
-    public String getDestname() {
-        return destname;
+    public BusStop getBusStop() {
+        return stop;
     }
 }
