@@ -89,19 +89,14 @@ public class DirectionFinder {
         List<Route> routes = new ArrayList<Route>();
         List<DisplayRoute> drs = new ArrayList<>();
 //        List<DisplayRoute> drs = new ArrayList<>();
-        List<Users> users = new ArrayList<Users>();
+//        List<Users> users = new ArrayList<Users>();
         JSONObject jsonData = new JSONObject(data);
         JSONArray jsonRoutes = jsonData.getJSONArray("routes");
 
         for (int i = 0; i < jsonRoutes.length(); i++)
-
         {
             JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
             Route route = new Route();
-//            Users user = new Users();
-
-
-
             JSONObject overview_polylineJson = jsonRoute.getJSONObject("overview_polyline");
             JSONArray jsonLegs = jsonRoute.getJSONArray("legs");
             JSONObject jsonSteps = jsonLegs.getJSONObject(0);
@@ -139,8 +134,6 @@ public class DirectionFinder {
                     dr.bus_number=null;
                     dr.no_of_stops = null;
                     dr.arrival_time = null;
-
-
                 }
 
 //              Log.d("Instruction", "Instruction for current path :  " + dr.instruction);
@@ -160,7 +153,6 @@ public class DirectionFinder {
 
         }
 
-//        Log.d("Length", "Length of drs array :  " );
 
         listener.onDirectionFinderSuccess(routes,drs);
 
