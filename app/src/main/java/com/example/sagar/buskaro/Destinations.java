@@ -2,26 +2,63 @@ package com.example.sagar.buskaro;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import Modules.BusRoutes;
 import Modules.BusStop;
+import Modules.DirectionFinder;
+import Modules.DirectionFinderListener;
+import Modules.DisplayRoute;
+import Modules.Distance;
+import Modules.Duration;
+import Modules.Route;
 
 public class Destinations extends AppCompatActivity {
+    private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
+    private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
+    private DirectionFinderListener listener;
+    private List<Marker> originMarkers = new ArrayList<>();
+    private List<Marker> destinationMarkers = new ArrayList<>();
+    private List<Polyline> polylinePaths = new ArrayList<>();
     RecyclerView recyclerView2;
     DestAdapter adapter2;
     List<Object> destlist;
@@ -34,8 +71,163 @@ public class Destinations extends AppCompatActivity {
     List<BusStop> AllStops;
     List<BusRoutes> AllRoutes;
     private DatabaseReference dbr;
+    private String nearest_busstop;
+    private String nearestbusstop;
+
     BusRoutes r;
     List<String> key;
+
+    public void execute(String or,String destination) throws UnsupportedEncodingException {
+        onDirectionFinderStart();
+        new Destinations.DownloadRawData().execute(createUrl(or,destination));
+    }
+
+    private String createUrl(String origin,String destination) throws UnsupportedEncodingException {
+        String urlOrigin = URLEncoder.encode(origin, "utf-8");
+        String urlDestination = URLEncoder.encode(destination, "utf-8");
+        String URL = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination +"&mode=transit&transit_mode=bus"  +"&key=" + GOOGLE_API_KEY;
+        Log.d("URL ", "createUrl: " + URL);
+        return URL;
+    }
+
+
+    public void onDirectionFinderStart() {
+
+        if (originMarkers != null) {
+            for (Marker marker : originMarkers) {
+                marker.remove();
+            }
+        }
+
+        if (destinationMarkers != null) {
+            for (Marker marker : destinationMarkers) {
+                marker.remove();
+            }
+        }
+
+        if (polylinePaths != null) {
+            for (Polyline polyline : polylinePaths) {
+                polyline.remove();
+            }
+        }
+    }
+
+    private void sendRequest() {
+
+        String origin = null ;
+        String destination = null ;
+
+        origin=getIntent().getStringExtra("Current Location");
+
+//        Log.d("HELLO", "sendRequest: " + origin);
+
+
+
+
+        destination = "Kailash Colony";
+        try {
+            execute(origin,destination);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    private class DownloadRawData extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String link = params[0];
+            try {
+                URL url = new URL(link);
+                InputStream is = url.openConnection().getInputStream();
+                StringBuffer buffer = new StringBuffer();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                }
+
+                return buffer.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String res) {
+            try {
+                parseJSon(res);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void parseJSon(String data) throws JSONException {
+        Log.d("IN MAPSA WALA PARSE", "HEKKKII: ");
+
+        if (data == null)
+            return;
+
+        List<Route> routes = new ArrayList<Route>();
+        List<DisplayRoute> drs = new ArrayList<>();
+        JSONObject jsonData = new JSONObject(data);
+        JSONArray jsonRoutes = jsonData.getJSONArray("routes");
+
+        for (int i = 0; i < jsonRoutes.length(); i++)
+        {
+            JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
+            Route route = new Route();
+            JSONObject overview_polylineJson = jsonRoute.getJSONObject("overview_polyline");
+            JSONArray jsonLegs = jsonRoute.getJSONArray("legs");
+            JSONObject jsonSteps = jsonLegs.getJSONObject(0);
+            JSONObject jsonLeg = jsonLegs.getJSONObject(0);
+            JSONArray jsonStep = jsonSteps.getJSONArray("steps");
+            JSONObject jsonDistance = jsonLeg.getJSONObject("distance");
+            JSONObject jsonDuration = jsonLeg.getJSONObject("duration");
+            String json_time = jsonLeg.getJSONObject("duration").getString("text");
+            JSONObject jsonEndLocation = jsonLeg.getJSONObject("end_location");
+            JSONObject jsonStartLocation = jsonLeg.getJSONObject("start_location");
+            for(int j=0;j< jsonStep.length(); j++)
+            {
+                DisplayRoute dr = new DisplayRoute();
+                if(j==0)
+                {
+                    JSONObject current_step = jsonStep.getJSONObject(j);
+                    nearest_busstop = current_step.getString("html_instructions").toString();
+
+                }
+
+
+
+
+
+            }
+
+
+        }
+
+        String[] busstop = nearest_busstop.split(" to ");
+        nearestbusstop = busstop[1];
+
+        searchView.setQuery(nearestbusstop,true);
+
+
+
+//        Log.d("NEAREST BUSSTOP", "parseJSon: " + busstop[1]);
+
+    }
+
+
 
 
     @Override
@@ -301,6 +493,8 @@ public class Destinations extends AppCompatActivity {
 
         //setting adapter to recyclerview
         recyclerView2.setAdapter(adapter2);
+
+        sendRequest();
 
     }
 
