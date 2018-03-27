@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Modules.BusRoutes;
+import Modules.BusStop;
 
 /**
  * Created by Harshit Verma on 23-03-2018.
@@ -66,9 +67,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Bus_Routes_Search_Result.class);
-                        intent.putExtra("dest",dest.getBusStop().getStopname());
-
-                        intent.putExtra("favrecimg",dest.getImage());
+                        intent.putExtra("BusStop", dest.getBusStop());
                         ctx.startActivity(intent);
 
                     }
@@ -76,7 +75,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                 break;
 
             case 1:
-                Dest2 dest2=(Dest2) destlist.get(position);
+                final Dest2 dest2=(Dest2) destlist.get(position);
                 BusRoutes route = dest2.getBusRoute();
                 holder.destname.setText(route.getDestination());
                 holder.busno.setText(route.getBus_number());
@@ -87,6 +86,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Route_Description.class);
+                        intent.putExtra("BusRoutes",dest2.getBusRoute());
                         ctx.startActivity(intent);
 
                     }

@@ -1,5 +1,6 @@
 package Modules;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by abhijeet on 23/3/18.
  */
 
-public class BusRoutes {
+public class BusRoutes implements Serializable {
 
     public String bus_number;
     public List<BusStop> stations;
@@ -33,7 +34,7 @@ public class BusRoutes {
             return stations.get(0).getStopname();
         }
         else{
-            return "Deafault Station";
+            return "Default Station";
         }
     }
 
@@ -42,7 +43,7 @@ public class BusRoutes {
             return stations.get(stations.size() - 1).getStopname();
         }
         else{
-            return "Deafault Station";
+            return "Default Station";
         }
     }
 
