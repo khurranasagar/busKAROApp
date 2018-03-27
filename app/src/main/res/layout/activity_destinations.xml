@@ -29,7 +29,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:onClick="backbutton"
                 app:srcCompat="@drawable/backarrow" />
 
             <LinearLayout
@@ -40,6 +43,7 @@
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="20dp"
                     android:baselineAlignBottom="true"
                     app:srcCompat="@drawable/current" />
@@ -58,47 +62,48 @@
                     android:textAlignment="center"></android.support.v7.widget.SearchView>
 
                 <!--<EditText-->
-                    <!--android:id="@+id/neareststop"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="40dp"-->
-                    <!--android:layout_marginBottom="5dp"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginRight="40dp"-->
-                    <!--android:background="@drawable/login_edittext"-->
-                    <!--android:drawableLeft="@drawable/search"-->
-                    <!--android:gravity="center"-->
-                    <!--android:hint="@string/NearestStop"-->
-                    <!--android:textAlignment="center"></EditText>-->
+                <!--android:id="@+id/neareststop"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:background="@drawable/login_edittext"-->
+                <!--android:drawableLeft="@drawable/search"-->
+                <!--android:gravity="center"-->
+                <!--android:hint="@string/NearestStop"-->
+                <!--android:textAlignment="center"></EditText>-->
 
 
             </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:baselineAlignBottom="true"
-                app:srcCompat="@drawable/destmark" />
-
-            <android.support.v7.widget.SearchView
-                android:id="@+id/destination"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/login_edittext"
-                android:drawableLeft="@drawable/search"
-                android:gravity="center"
-                android:hint="@string/Destination"
-                android:textAlignment="center"></android.support.v7.widget.SearchView>
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <!--<EditText-->
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:baselineAlignBottom="true"
+                    app:srcCompat="@drawable/destmark" />
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@drawable/login_edittext"
+                    android:drawableLeft="@drawable/search"
+                    android:gravity="center"
+                    android:hint="@string/Destination"
+                    android:textAlignment="center"></android.support.v7.widget.SearchView>
+
+                <!--<EditText-->
                 <!--android:id="@+id/destination"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="40dp"-->
@@ -110,8 +115,7 @@
                 <!--android:hint="@string/Destination"-->
                 <!--android:textAlignment="center"></EditText>-->
 
-        </LinearLayout>
-
+            </LinearLayout>
 
 
         </LinearLayout>
