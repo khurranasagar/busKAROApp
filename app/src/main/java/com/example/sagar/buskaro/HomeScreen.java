@@ -95,7 +95,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(),Destinations.class);
                 intent.putExtra("EXTRA_SESSION_ID", key);
-                intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + " " + Double.toString(lastlocation.getLongitude()));
+                intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
                 startActivity(intent);
             }
         });
