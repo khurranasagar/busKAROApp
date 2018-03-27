@@ -55,6 +55,7 @@ public class Destinations extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
         }
 
+
         searchView = (SearchView) findViewById(R.id.neareststop);
         searchView2 = (SearchView) findViewById(R.id.destination);
         searchView2.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
