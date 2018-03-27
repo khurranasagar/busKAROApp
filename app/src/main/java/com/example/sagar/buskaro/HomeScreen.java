@@ -105,11 +105,11 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
         mapFragment.getMapAsync(this);
 
         writeNewUser();
-        try {
+        /*try {
             writeNewRoutes();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
     }

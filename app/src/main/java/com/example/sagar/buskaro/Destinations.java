@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class Destinations extends AppCompatActivity {
         }
 
         searchView = (SearchView) findViewById(R.id.neareststop);
+        searchView.setQueryHint("Nearest Stop");
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -76,7 +79,11 @@ public class Destinations extends AppCompatActivity {
         //setting adapter to recyclerview
         recyclerView2.setAdapter(adapter2);
 
+
     }
 
 
+    public void backbutton(View view) {
+        onBackPressed();
+    }
 }

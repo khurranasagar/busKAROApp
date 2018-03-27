@@ -78,7 +78,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:id="@+id/routedesc_recview"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="60dp"
         android:layout_below="@+id/routedesc_card"
         android:layout_height="match_parent" >
 
@@ -89,18 +89,18 @@
         android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="5dp"
-
         android:layout_marginLeft="5dp"
-        android:background="@color/neworange"
-        android:drawableLeft="@drawable/busfront2"
+        android:background="@drawable/buskarobutton"
         android:drawablePadding="-15sp"
-        android:fontFamily="sans-serif-condensed"
         android:text="busKARO"
         android:textAllCaps="false"
         android:elevation="20px"
         android:textColor="@color/white"
-        android:textSize="28sp" />
+        android:textSize="20sp" />
+        <!--android:drawableLeft="@drawable/busfront2"-->
+
     <Button
         android:id="@+id/button4"
         android:layout_width="165dp"
@@ -109,16 +109,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
-
         android:layout_marginRight="5dp"
-        android:background="@color/neworange"
-        android:drawableLeft="@drawable/busfront2"
+        android:background="@drawable/buskarobutton"
         android:drawablePadding="-15sp"
-        android:fontFamily="sans-serif-condensed"
         android:text="busKARLI"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="28sp" />
+        android:textSize="20sp" />
+        <!--android:drawableLeft="@drawable/busfront2"-->
+
 
 
 </RelativeLayout>

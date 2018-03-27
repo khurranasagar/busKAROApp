@@ -37,5 +37,5 @@
             android:background="@drawable/start_button"
             android:elevation="@dimen/fab_margin"
             android:text="GET STARTED"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/white" />
     </RelativeLayout>
