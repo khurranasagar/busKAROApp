@@ -28,7 +28,7 @@ public class SliderAdapter extends android.support.v4.view.PagerAdapter{
     public int[] slides_images = {R.drawable.aa,R.drawable.yoo1,R.drawable.busandman};
 
     public String[] slides_heading={ "Plan your bus journey with bus route and timings","Use busKaro credits to track your bus with live ETA's ",
-            "Share the status of your bus anonymously to eran busKARO credits"
+            "Share the status of your bus anonymously to earn busKARO credits"
     };
 
     public String[] slides_upper = {"PLAN","BUSKARO","BUSKARLI"};
