@@ -132,6 +132,9 @@ public class Destinations extends AppCompatActivity {
         }
     }
 
+    public void backbutton(View view) {
+        onBackPressed();
+    }
 
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {

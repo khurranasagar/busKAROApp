@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "465021956460-pl27k2p5sior9nsa8dvqj817c0qkr8ev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sagar.buskaro",
+            "certificate_hash": "50340882dcbf82e4a21a9ebd69c7c53e936df19a"
+          }
+        },
+        {
           "client_id": "465021956460-8fads228r51j9mkhak2n3mp9stfm688n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
