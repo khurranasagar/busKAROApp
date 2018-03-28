@@ -24,7 +24,7 @@
             android:layout_marginBottom="32dp"
             android:text="Plan you travel with Live Bus Timings"
             android:textAlignment="center"
-            android:textColor="@color/MidnightBlue"
+            android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
 
         <Button

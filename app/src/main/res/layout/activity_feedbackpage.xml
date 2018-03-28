@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="43dp"
+        android:layout_marginBottom="20dp"
         android:text="Please rate our app"
         android:textAlignment="center"
         android:textColor="@android:color/black"
@@ -43,6 +44,19 @@
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18dp" />
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/rate_us"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:gravity="top|left"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:background="@drawable/login_edittext"
+        android:hint="Write your feedback here"
+        />
 
     <Button
 
@@ -57,16 +71,7 @@
         android:text="Submit"
         android:textColor="@android:color/white" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/ratingBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:ems="10"
-        android:hint="Write your feedback here"
-        android:inputType="textPersonName" />
+
 
 </RelativeLayout>
 

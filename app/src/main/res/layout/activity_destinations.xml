@@ -16,7 +16,7 @@
         android:layout_height="135dp"
         android:layout_marginStart="0dp"
 
-        android:background="@color/MidnightBlue"
+        android:background="@color/colorPrimary"
         android:label="@string/Destination"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 

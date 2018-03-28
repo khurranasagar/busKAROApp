@@ -501,5 +501,10 @@ public class Destinations extends AppCompatActivity {
 
     }
 
+   /* protected void onResume()
+    {
+        super.onResume();
+        overridePendingTransition(R.transition.slide_in_up, R.transition.stay);
+    }*/
 
 }

@@ -14,8 +14,9 @@
         android:layout_width="20dp"
         android:id="@+id/location"
         android:src="@drawable/gps"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="43dp"
-        android:layout_height="18dp" />
+        android:layout_height="20dp" />
 
     <TextView
         android:layout_width="wrap_content"

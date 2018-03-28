@@ -1,7 +1,6 @@
 package com.example.sagar.buskaro;
 
 
-import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (mDots.length > 0)
         {
-            mDots[position].setTextColor(getResources().getColor(R.color.neworange));
+            mDots[position].setTextColor(getResources().getColor(R.color.colorSecondary));
         }
     }
 

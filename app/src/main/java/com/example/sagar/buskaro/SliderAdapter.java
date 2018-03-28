@@ -74,6 +74,7 @@ public class SliderAdapter extends android.support.v4.view.PagerAdapter{
         {
             signInButton.setVisibility(View.VISIBLE);
 
+
         }
         else
         {

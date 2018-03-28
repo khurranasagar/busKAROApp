@@ -10,6 +10,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,11 +31,14 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     RouteDescAdapter adapter;
     private static final String TAG="Route_Description";
     List<Routedesc_getters> routedescgettersList;
+    ImageView backbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route__description);
+        backbutton=(ImageView)findViewById(R.id.backarrow);
+        backbutton.bringToFront();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map2);
@@ -140,5 +144,9 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     private void busKAROconfirm() {
     }
     private void busKARLIok() {
+    }
+
+    public void backbutton(View view) {
+        onBackPressed();
     }
 }
