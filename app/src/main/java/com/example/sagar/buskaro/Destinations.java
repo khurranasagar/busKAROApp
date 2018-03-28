@@ -125,11 +125,11 @@ public class Destinations extends AppCompatActivity {
 
 
         destination = "Kailash Colony";
-        try {
+        /*try {
             execute(origin,destination);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void backbutton(View view) {

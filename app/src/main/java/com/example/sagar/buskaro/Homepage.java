@@ -88,15 +88,15 @@ public class Homepage extends AppCompatActivity
         return true;
     }
 
-    public void ClickSearchBox(View view) {
+    /*public void ClickSearchBox(View view) {
         Intent intent=new Intent(this,Destinations.class);
-        /*Log.d(" ket in homescreen", "ClickSearchBox: " + key);
-        intent.putExtra("EXTRA_SESSION_ID", key);*/
+        *//*Log.d(" ket in homescreen", "ClickSearchBox: " + key);
+        intent.putExtra("EXTRA_SESSION_ID", key);*//*
         startActivity(intent);
     }
 
     public void destbutton(View view) {
         Intent intent=new Intent(this,Destinations.class);
         startActivity(intent);
-    }
+    }*/
 }

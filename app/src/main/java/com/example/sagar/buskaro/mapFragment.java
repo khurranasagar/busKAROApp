@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,7 +32,7 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class mapFragment extends Fragment implements OnMapReadyCallback, LocationListener {
+public class mapFragment extends Fragment implements OnMapReadyCallback, LocationListener,View.OnClickListener {
 
     private GoogleMap map;
     private LocationManager locationManager;
@@ -51,12 +52,18 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, Locatio
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_map, container, false);
+        Button b1=(Button)v.findViewById(R.id.button3);
+        b1.setOnClickListener(this);
+        Button b2=(Button)v.findViewById(R.id.destbutton2);
+        b2.setOnClickListener(this);
+
 
         return v;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.map1);
@@ -143,6 +150,18 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, Locatio
         map.moveCamera(CameraUpdateFactory.newLatLng(newPnt));
     }
 
+    public void ClickSearchBox(View view) {
+        Intent intent=new Intent(view.getContext(),Destinations.class);
+//        *//*Log.d(" ket in homescreen", "ClickSearchBox: " + key);
+//        intent.putExtra("EXTRA_SESSION_ID", key);*//*
+        startActivity(intent);
+    }
+
+    public void destbutton(View view) {
+        Intent intent=new Intent(view.getContext(),Destinations.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         lat = location.getLatitude();
@@ -163,6 +182,21 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, Locatio
 
     @Override
     public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button3:
+                Intent intent=new Intent(v.getContext(),Destinations.class);
+                startActivity(intent);
+                break;
+            case R.id.destbutton2:
+                Intent intent2=new Intent(v.getContext(),Destinations.class);
+                startActivity(intent2);
+                break;
+        }
 
     }
 }
