@@ -98,7 +98,9 @@ public class HomeScreen extends AppCompatActivity implements OnMapReadyCallback,
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(),Destinations.class);
                 intent.putExtra("EXTRA_SESSION_ID", key);
-                intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
+                if(lastlocation != null) {
+                    intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
+                }
                 startActivity(intent);
             }
         });
@@ -349,7 +351,7 @@ public class HomeScreen extends AppCompatActivity implements OnMapReadyCallback,
 
         locationRequest.setInterval(1000);
         locationRequest.setFastestInterval(1000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(client, locationRequest, this);
         }

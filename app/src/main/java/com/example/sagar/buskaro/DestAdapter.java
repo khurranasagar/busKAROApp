@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,13 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
     private Context ctx;
     private List<Object> destlist;
     private EditText etorigin;
+    private String origin;
 
-    public DestAdapter(Context ctx, List<Object> destlist, EditText etorigin) {
+    public DestAdapter(Context ctx, List<Object> destlist, EditText etorigin, String origin) {
         this.ctx = ctx;
         this.destlist = destlist;
         this.etorigin = etorigin;
+        this.origin = origin;
     }
 
 
@@ -90,6 +93,9 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Route_Description.class);
                         intent.putExtra("BusRoutes",dest2.getBusRoute());
+                        intent.putExtra("Origin",etorigin.getText());
+                        intent.putExtra("LatLngCurrentLocation", origin);
+                        Log.d("Origin Text Intent", "onClick: " + etorigin.getText());
                         ctx.startActivity(intent);
 
                     }

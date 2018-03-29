@@ -29,6 +29,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     private String buskarlimsg="Congratulations, you have earned <b>5 busKARO</b> credits. <br/> BALANCE: 7bk";
     RecyclerView recyclerView;
     RouteDescAdapter adapter;
+    String origin;
     private static final String TAG="Route_Description";
     List<Routedesc_getters> routedescgettersList;
     ImageView backbutton;
@@ -39,6 +40,10 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
         setContentView(R.layout.activity_route__description);
         backbutton=(ImageView)findViewById(R.id.backarrow);
         backbutton.bringToFront();
+
+        origin = (String) getIntent().getStringExtra("Origin");
+        
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map2);

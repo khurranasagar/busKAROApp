@@ -60,6 +60,7 @@ public class Destinations extends AppCompatActivity {
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
+    String origin;
     RecyclerView recyclerView2;
     DestAdapter adapter2;
     List<Object> destlist;
@@ -436,13 +437,13 @@ public class Destinations extends AppCompatActivity {
 //        destlist.add(
 //                new Dest2(R.drawable.favorite2,"Rajiv Chowk","611A","Dhaula Kuan")
 //        );
+        sendRequest();
 
-        adapter2 = new DestAdapter(this, destlist,neareststop);
+        adapter2 = new DestAdapter(this, destlist,neareststop, origin);
 
         //setting adapter to recyclerview
         recyclerView2.setAdapter(adapter2);
 
-        sendRequest();
 
     }
 
