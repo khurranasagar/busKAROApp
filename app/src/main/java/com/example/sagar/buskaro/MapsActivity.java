@@ -1,3 +1,16 @@
+package com.example.sagar.buskaro;
+
+import android.support.v4.app.FragmentActivity;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
+import java.util.List;
+
+import Modules.DirectionFinderListener;
+import Modules.DisplayRoute;
+import Modules.Route;
+
 //package com.example.sagar.buskaro;
 //
 //import android.Manifest;
@@ -67,7 +80,22 @@
 //import Modules.Duration;
 //import Modules.Route;
 //
-//public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
+    @Override
+    public void onDirectionFinderStart() {
+
+    }
+
+    @Override
+    public void onDirectionFinderSuccess(List<Route> route, List<DisplayRoute> drs) {
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+}
 //
 //    private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
 //    private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";

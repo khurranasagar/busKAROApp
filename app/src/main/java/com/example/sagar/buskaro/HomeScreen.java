@@ -1,6 +1,7 @@
 package com.example.sagar.buskaro;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -11,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -50,7 +52,7 @@ import Modules.BusRoutes;
 import Modules.BusStop;
 import Modules.Users;
 
-public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener  {
+public class HomeScreen extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener  {
 
     private GoogleMap mMap;
     private DatabaseReference dbr;
@@ -226,7 +228,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
         dbr = FirebaseDatabase.getInstance().getReference();
         Users us = new Users();
         FirebaseUser user = firebaseauth.getCurrentUser();
-        dbr.child("users").child(user.getDisplayName()).setValue(us);
+//        dbr.child("users").child(user.getDisplayName()).setValue(us);
     }
 
     @Override
@@ -339,6 +341,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 

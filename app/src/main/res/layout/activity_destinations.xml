@@ -13,10 +13,10 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="135dp"
         android:layout_marginStart="0dp"
 
-        android:background="@color/MidnightBlue"
+        android:background="@color/colorPrimary"
         android:label="@string/Destination"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 

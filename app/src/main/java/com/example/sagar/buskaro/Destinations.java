@@ -243,9 +243,6 @@ public class Destinations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destinations);
 
-
-
-
         key = new ArrayList<String>();
         key.add("-L8bGaUG6Zja4Lvd4AhJ");
         key.add("-L8bPAYu2rAdR3ZbwyMv");

@@ -1,7 +1,8 @@
-<RelativeLayout
-    android:layout_height="match_parent"
+<RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -13,9 +14,24 @@
         android:layout_height="240dp"
         tools:context="com.example.sagar.buskaro.Route_Description" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:id="@+id/backarrow"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:onClick="backbutton"
+        app:srcCompat="@drawable/backarrow" />
+
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="2dp"
         android:id="@+id/routedesc_card"
         android:layout_below="@+id/map2"
         android:layout_margin="4dp">
@@ -94,9 +110,10 @@
         android:layout_marginLeft="5dp"
         android:background="@drawable/buskarobutton"
         android:drawablePadding="-15sp"
+        android:elevation="20px"
+        android:onClick="busKARO"
         android:text="busKARO"
         android:textAllCaps="false"
-        android:elevation="20px"
         android:textColor="@color/white"
         android:textSize="20sp" />
         <!--android:drawableLeft="@drawable/busfront2"-->
@@ -104,14 +121,15 @@
     <Button
         android:id="@+id/button4"
         android:layout_width="165dp"
-        android:elevation="20px"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/buskarobutton"
         android:drawablePadding="-15sp"
+        android:elevation="20px"
+        android:onClick="busKARLI"
         android:text="busKARLI"
         android:textAllCaps="false"
         android:textColor="@color/white"
