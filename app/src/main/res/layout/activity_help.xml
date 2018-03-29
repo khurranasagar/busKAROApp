@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sagar.buskaro.Help">
+    <!--<include layout="@layout/appbar" />-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_actionbar"
+        android:theme="@style/ToolBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/help1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/popular"
+        android:layout_marginTop="60sp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/help2"
+        android:layout_width="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/help1"
+        app:srcCompat="@drawable/doc" />
+
+    <TextView
+        android:id="@+id/help3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help2"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/help2"
+        android:text="@string/help1"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/help4"
+        android:layout_marginLeft="16dp"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/help3"
+        android:layout_marginRight="15dp"
+        app:srcCompat="@drawable/doc" />
+
+    <TextView
+        android:id="@+id/help5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help4"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/help4"
+        android:text="@string/help2"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/help6"
+        android:layout_width="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/help5"
+        android:layout_marginRight="15dp"
+        app:srcCompat="@drawable/doc" />
+
+    <TextView
+        android:id="@+id/help7"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help6"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/help6"
+        android:text="@string/help3"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/help8"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/help7"
+        android:layout_marginRight="15dp"
+        app:srcCompat="@drawable/doc" />
+
+    <TextView
+        android:id="@+id/help9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help8"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/help8"
+        android:text="@string/help4"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/help10"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/help9"
+        android:layout_marginRight="15dp"
+        app:srcCompat="@drawable/doc" />
+
+    <TextView
+        android:id="@+id/help11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help10"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/help10"
+        android:text="@string/help5"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@id/help10"
+        android:background="@color/colorBlack"
+        android:id="@+id/view"></View>
+
+    <ImageView
+        android:id="@+id/help12"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignStart="@+id/help10"
+        android:layout_below="@+id/view"
+        app:srcCompat="@drawable/feedback" />
+
+    <TextView
+        android:id="@+id/help13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/help12"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/help12"
+        android:text="@string/Feedback_title"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+
+        android:layout_below="@id/help12"
+        android:background="@color/colorBlack"
+        android:id="@+id/view2"></View>
+
+
+</RelativeLayout>
