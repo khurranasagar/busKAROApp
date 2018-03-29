@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,10 +24,12 @@ import Modules.BusStop;
 public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder> {
     private Context ctx;
     private List<Object> destlist;
+    private EditText etorigin;
 
-    public DestAdapter(Context ctx, List<Object> destlist) {
+    public DestAdapter(Context ctx, List<Object> destlist, EditText etorigin) {
         this.ctx = ctx;
         this.destlist = destlist;
+        this.etorigin = etorigin;
     }
 
 

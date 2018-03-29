@@ -78,6 +78,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        lastlocation = new Location("IIIT Delhi");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         firebaseauth = FirebaseAuth.getInstance();
@@ -363,10 +364,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback, 
     }
 
     public void ClickSearchBox(View v){
-        Intent intent = new Intent(this, Destinations.class);
-        Log.d(" ket in homescreen", "ClickSearchBox: " + key);
-        intent.putExtra("EXTRA_SESSION_ID", key);
-        startActivity(intent);
+//        Intent intent = new Intent(this, Destinations.class);
+//        Log.d(" ket in homescreen", "ClickSearchBox: " + key);
+//        intent.putExtra("EXTRA_SESSION_ID", key);
+//        startActivity(intent);
     }
 
 }

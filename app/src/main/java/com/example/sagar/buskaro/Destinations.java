@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,8 @@ public class Destinations extends AppCompatActivity {
     RecyclerView recyclerView2;
     DestAdapter adapter2;
     List<Object> destlist;
-    SearchView searchView;
+//    SearchView searchView;
+    EditText neareststop;
     SearchView searchView2;
     List<BusStop> favourite_Destinations;
     List<BusStop> Recent_Destinations;
@@ -84,6 +86,7 @@ public class Destinations extends AppCompatActivity {
 
     private String createUrl(String origin,String destination) throws UnsupportedEncodingException {
         String urlOrigin = URLEncoder.encode(origin, "utf-8");
+        Log.d("Hey Baaby", "createUrl: " + urlOrigin);
         String urlDestination = URLEncoder.encode(destination, "utf-8");
         String URL = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination +"&mode=transit&transit_mode=bus"  +"&key=" + GOOGLE_API_KEY;
         Log.d("URL ", "createUrl: " + URL);
@@ -114,24 +117,29 @@ public class Destinations extends AppCompatActivity {
 
     private void sendRequest() {
 
-        String origin = null ;
+        String origin = " ";
         String destination = null ;
 
         origin=getIntent().getStringExtra("Current Location");
 
-//        Log.d("HELLO", "sendRequest: " + origin);
+        Log.d("HELLO", "sendRequest: " + origin);
 
 
 
 
         destination = "Kailash Colony";
-        try {
-            execute(origin,destination);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        if(origin != null && !origin.equals(" ")) {
+            try {
+                execute(origin, destination);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    public void backbutton(View view) {
+        onBackPressed();
+    }
 
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {
@@ -219,7 +227,7 @@ public class Destinations extends AppCompatActivity {
         String[] busstop = nearest_busstop.split(" to ");
         nearestbusstop = busstop[1];
 
-        searchView.setQuery(nearestbusstop,true);
+        neareststop.setText(nearestbusstop);
 
 
 
@@ -235,6 +243,9 @@ public class Destinations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destinations);
 
+
+
+
         key = new ArrayList<String>();
         key.add("-L8bGaUG6Zja4Lvd4AhJ");
         key.add("-L8bPAYu2rAdR3ZbwyMv");
@@ -248,7 +259,7 @@ public class Destinations extends AppCompatActivity {
         }
 
 
-        searchView = (SearchView) findViewById(R.id.neareststop);
+        neareststop = (EditText) findViewById(R.id.neareststop);
         searchView2 = (SearchView) findViewById(R.id.destination);
         searchView2.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -306,66 +317,6 @@ public class Destinations extends AppCompatActivity {
                         }
                     }
                 }
-                adapter2.setfilter(FilteredList);
-                return false;
-            }
-        });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                List<Object> FilteredList = new ArrayList<Object>();
-                if (newText.equals("") || newText.equals(" ")) {
-                    FilteredList = new ArrayList<>();
-                    for(int i=0;i<favourite_Destinations.size();i++){
-                        FilteredList.add(new Dest(R.drawable.favorite2,favourite_Destinations.get(i)));
-                    }
-                    for(int i=0;i<Recent_Bus_numbers.size();i++){
-                        FilteredList.add(new Dest2(R.drawable.clock,Recent_Bus_numbers.get(i)));
-                    }
-                    for(int i=0;i<Recent_Destinations.size();i++){
-                        FilteredList.add(new Dest(R.drawable.clock,Recent_Destinations.get(i)));
-                    }
-                    for(int i=0;i<favourite_Bus_numbers.size();i++){
-                        FilteredList.add(new Dest2(R.drawable.favorite2,favourite_Bus_numbers.get(i)));
-                    }
-                }
-                else {
-                    for (int i = 0; i < AllStops.size(); i++) {
-                        if (AllStops.get(i).getStopname().toLowerCase().startsWith(newText.toLowerCase())) {
-                            FilteredList.add(new Dest(R.drawable.finaldest, AllStops.get(i)));
-                        }
-                    }
-                for (int i = 0; i < AllRoutes.size(); i++) {
-                    if (AllRoutes.get(i).getBus_number().toLowerCase().startsWith(newText.toLowerCase())) {
-                        FilteredList.add(new Dest2(R.drawable.favorite2, AllRoutes.get(i)));
-                    }
-                }
-                for (int i = 0; i < favourite_Bus_numbers.size(); i++) {
-                    if (favourite_Bus_numbers.get(i).getBus_number().toLowerCase().startsWith(newText.toLowerCase())) {
-                        FilteredList.add(new Dest2(R.drawable.favorite2, favourite_Bus_numbers.get(i)));
-                    }
-                }
-                for (int i = 0; i < Recent_Bus_numbers.size(); i++) {
-                    if (Recent_Bus_numbers.get(i).getBus_number().toLowerCase().startsWith(newText.toLowerCase())) {
-                        FilteredList.add(new Dest2(R.drawable.clock, Recent_Bus_numbers.get(i)));
-                    }
-                }
-                for (int i = 0; i < Recent_Destinations.size(); i++) {
-                    if (Recent_Destinations.get(i).getStopname().toLowerCase().startsWith(newText.toLowerCase())) {
-                        FilteredList.add(new Dest(R.drawable.clock, Recent_Destinations.get(i)));
-                    }
-                }
-                for (int i = 0; i < favourite_Destinations.size(); i++) {
-                    if (favourite_Destinations.get(i).getStopname().toLowerCase().startsWith(newText.toLowerCase())) {
-                        FilteredList.add(new Dest(R.drawable.favorite2, favourite_Destinations.get(i)));
-                    }
-                }
-            }
                 adapter2.setfilter(FilteredList);
                 return false;
             }
@@ -489,7 +440,7 @@ public class Destinations extends AppCompatActivity {
 //                new Dest2(R.drawable.favorite2,"Rajiv Chowk","611A","Dhaula Kuan")
 //        );
 
-        adapter2 = new DestAdapter(this, destlist);
+        adapter2 = new DestAdapter(this, destlist,neareststop);
 
         //setting adapter to recyclerview
         recyclerView2.setAdapter(adapter2);
