@@ -30,6 +30,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     RecyclerView recyclerView;
     RouteDescAdapter adapter;
     String origin;
+    String LatlngLocation;
     private static final String TAG="Route_Description";
     List<Routedesc_getters> routedescgettersList;
     ImageView backbutton;
@@ -42,7 +43,11 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
         backbutton.bringToFront();
 
         origin = (String) getIntent().getStringExtra("Origin");
-        
+
+        if(origin == null || origin.equals(""));
+        {
+            LatlngLocation = (String) getIntent().getStringExtra("LatLngCurrentLocation");
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
