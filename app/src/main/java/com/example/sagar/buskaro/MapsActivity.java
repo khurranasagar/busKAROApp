@@ -496,7 +496,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                @Override
 //                public void onClick(View view) {
 //
-//                    check_buskarli_status = true ;
+//
+//
+//
 //
 //                    DatabaseReference buses = dbr.child("bus_routes_database").child(bus_karli_bus_number);
 //                    Calendar calobj = Calendar.getInstance();

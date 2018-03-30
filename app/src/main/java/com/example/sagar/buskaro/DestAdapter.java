@@ -93,7 +93,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                     public void onClick(View v) {
                         Intent intent = new Intent(ctx,Route_Description.class);
                         intent.putExtra("BusRoutes",dest2.getBusRoute());
-                        intent.putExtra("Origin",etorigin.getText());
+                        intent.putExtra("Origin",etorigin.getText().toString());
                         intent.putExtra("LatLngCurrentLocation", origin);
                         Log.d("Origin Text Intent", "onClick: " + etorigin.getText());
                         ctx.startActivity(intent);
