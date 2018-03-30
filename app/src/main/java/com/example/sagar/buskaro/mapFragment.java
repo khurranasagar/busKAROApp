@@ -24,9 +24,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -61,7 +63,7 @@ import static com.example.sagar.buskaro.HomeScreen.PERMISSION_REQUEST_LOCATION_C
 /**
  * A simple {@link Fragment} subclass.
  */
-public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,View.OnClickListener {
+public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
     private GoogleMap map;
     public LocationManager locationManager;
@@ -78,6 +80,7 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
     private GoogleApiClient client;
     private FirebaseAuth firebaseauth;
+    FloatingActionButton btnMyLocation;
 
     private View mMapView;
 
@@ -93,10 +96,21 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
 
         View v = inflater.inflate(R.layout.fragment_map, container, false);
-        Button b1=(Button)v.findViewById(R.id.button3);
-        b1.setOnClickListener(this);
-        Button b2=(Button)v.findViewById(R.id.destbutton2);
-        b2.setOnClickListener(this);
+        EditText b1=(EditText)v.findViewById(R.id.button3);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(view.getContext(),Destinations.class);
+                if(lastlocation != null) {
+                    intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
+                    Log.d("Location Passed", "ClickSearchBox: " + Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
+                }
+                startActivity(intent);
+
+            }
+        });
+//        Button b2=(Button)v.findViewById(R.id.destbutton2);
+//        b2.setOnClickListener(this);
 
         firebaseauth = FirebaseAuth.getInstance();
         dbr = FirebaseDatabase.getInstance().getReference();
@@ -114,6 +128,7 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rlp.setMargins(0, 0, 30, 120);
+
 
 
         writeNewUser();
@@ -138,9 +153,19 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                         }
                     }
                 });
+        //btnMyLocation = (FloatingActionButton) v.findViewById(R.id.myLocationButton);
+
+
+
+
+
+
 
         return v;
+
     }
+
+
 
     private void writeNewUser() {
         dbr = FirebaseDatabase.getInstance().getReference();
@@ -200,27 +225,33 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        map.setIndoorEnabled(false);
+        //map.getUiSettings().setMyLocationButtonEnabled(false);
         map.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(28.5456,77.2732) , 10) );
         if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             buildGoogleApiClient();
             map.setMyLocationEnabled(true);
         }
+//        btnMyLocation.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                Location loc = map.getMyLocation();
+//                if (loc != null) {
+//                    LatLng latLang = new LatLng(loc.getLatitude(), loc
+//                            .getLongitude());
+//                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLang, 15);
+//                    map.animateCamera(cameraUpdate);
+//
+//                }
+//
+//            }
+//        });
 
     }
 
-    public void ClickSearchBox(View view) {
-        Intent intent=new Intent(view.getContext(),Destinations.class);
-//        *//*Log.d(" ket in homescreen", "ClickSearchBox: " + key);
-//        intent.putExtra("EXTRA_SESSION_ID", key);*//*
-        intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
-        Log.d("Location Passed", "ClickSearchBox: " + Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
-        startActivity(intent);
-    }
 
-    public void destbutton(View view) {
-        Intent intent=new Intent(view.getContext(),Destinations.class);
-        startActivity(intent);
-    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -243,16 +274,7 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
     }
 
 
-    @Override
-    public void onClick(View v) {
 
-                Intent intent=new Intent(v.getContext(),Destinations.class);
-                if(lastlocation != null) {
-                    intent.putExtra("Current Location", Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
-                    Log.d("Location Passed", "ClickSearchBox: " + Double.toString(lastlocation.getLatitude()) + "," + Double.toString(lastlocation.getLongitude()));
-                }
-                                startActivity(intent);
-    }
 
     public boolean checkLocationPermission(){
 

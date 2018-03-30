@@ -43,6 +43,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
         backbutton.bringToFront();
 
         origin = (String) getIntent().getStringExtra("Origin");
+        Log.d("Recieved_Origin", "onCreate: " + origin);
 
         if(origin == null || origin.equals(""));
         {
