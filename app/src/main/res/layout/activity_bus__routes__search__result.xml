@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:id="@+id/Relat">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
@@ -12,12 +17,28 @@
     android:layout_height="240dp"
     tools:context="com.example.sagar.buskaro.Bus_Routes_Search_Result" />
 
+        <ImageView
+            android:id="@+id/backarrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:onClick="backbutton"
+            app:srcCompat="@drawable/backarrow" />
+
+    </FrameLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/routesoptions"
         android:layout_width="match_parent"
         android:layout_marginBottom="60dp"
-        android:layout_below="@+id/map"
+        android:layout_below="@+id/Relat"
         android:layout_height="match_parent" />
+
+
 
     <Button
         android:id="@+id/button3"

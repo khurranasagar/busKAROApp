@@ -4,27 +4,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:id="@+id/Rela">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map2"
-        android:layout_alignParentTop="true"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        tools:context="com.example.sagar.buskaro.Route_Description" />
+        tools:context="com.example.sagar.buskaro.Route_Description"
+        >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:id="@+id/backarrow"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:clickable="true"
-        android:onClick="backbutton"
-        app:srcCompat="@drawable/backarrow" />
+    </fragment>
+
+        <ImageView
+            android:id="@+id/backarrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:onClick="backbutton"
+            app:srcCompat="@drawable/backarrow" />
+
+
+    </FrameLayout>
+
+
 
 
     <android.support.v7.widget.CardView
@@ -33,7 +45,7 @@
         card_view:cardUseCompatPadding="true"
         card_view:cardElevation="2dp"
         android:id="@+id/routedesc_card"
-        android:layout_below="@+id/map2"
+        android:layout_below="@+id/Rela"
         android:layout_margin="4dp">
 
         <RelativeLayout
