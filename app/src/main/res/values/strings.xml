@@ -30,4 +30,6 @@
     <string name="help_title">Help</string>
     <string name="title_activity_favorites">Favorites</string>
     <string name="contact">Contact Us</string>
+    <string name="dest">Dest</string>
+    <string name="busno">Bus\nNo</string>
 </resources>

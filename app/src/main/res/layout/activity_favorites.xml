@@ -23,33 +23,80 @@
 
     <include layout="@layout/content_favorites" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="160dp"
+    <FrameLayout
         android:layout_gravity="bottom|end"
         android:layout_marginRight="@dimen/fab_margin"
-        android:visibility="invisible"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="@android:color/white" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
+        android:layout_marginBottom="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+        <TextView
+            android:id="@+id/busnotext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/busno"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:elevation="7dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="2dp"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </FrameLayout>
+
+
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
         android:layout_gravity="bottom|end"
         android:layout_marginRight="@dimen/fab_margin"
-        android:visibility="invisible"
-        app:elevation="6dp"
-        app:backgroundTint="@color/colorPrimary"
-        app:pressedTranslationZ="12dp"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="@android:color/white"/>
+
+        android:layout_marginBottom="90dp"
+        >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent"
+            android:visibility="invisible"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+        <TextView
+            android:id="@+id/desttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:text="@string/dest"
+            android:gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="3dp"
+            android:elevation="7dp"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </FrameLayout>
+
+
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
