@@ -97,12 +97,8 @@ public class Favorites extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.fab1:
 
-                Log.d("Favorites", "Fab 1");
-                break;
-            case R.id.fab2:
-
                 LayoutInflater li = LayoutInflater.from(context);
-                View promptsView = li.inflate(R.layout.prompts, null);
+                View promptsView = li.inflate(R.layout.prompts2, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
@@ -111,10 +107,48 @@ public class Favorites extends AppCompatActivity implements View.OnClickListener
                 alertDialogBuilder.setView(promptsView);
 
                 final EditText userInput = (EditText) promptsView
-                        .findViewById(R.id.editTextDialogUserInput);
+                        .findViewById(R.id.editTextDialogUserInput2);
 
                 // set dialog message
                 alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+                break;
+
+            case R.id.fab2:
+
+                LayoutInflater li2 = LayoutInflater.from(context);
+                View promptsView2 = li2.inflate(R.layout.prompts, null);
+
+                AlertDialog.Builder alertDialogBuilder2 = new AlertDialog.Builder(
+                        context);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder2.setView(promptsView2);
+
+                final EditText userInput2 = (EditText) promptsView2
+                        .findViewById(R.id.editTextDialogUserInput);
+
+                // set dialog message
+                alertDialogBuilder2
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
@@ -131,10 +165,10 @@ public class Favorites extends AppCompatActivity implements View.OnClickListener
                                 });
 
                 // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
+                AlertDialog alertDialog2 = alertDialogBuilder2.create();
 
                 // show it
-                alertDialog.show();
+                alertDialog2.show();
 
 
                 break;
