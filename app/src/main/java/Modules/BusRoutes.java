@@ -47,6 +47,10 @@ public class BusRoutes implements Serializable {
         }
     }
 
+    public List<BusStop> getStations(){
+        return stations;
+    }
+
 
 
 

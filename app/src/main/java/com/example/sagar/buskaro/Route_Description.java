@@ -2,6 +2,7 @@ package com.example.sagar.buskaro;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -51,6 +53,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import Modules.BusRoutes;
 import Modules.BusStop;
 import Modules.DirectionFinderListener;
 import Modules.DisplayRoute;
@@ -81,10 +84,81 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     public List<String> ETAs = new ArrayList<>();
     private boolean check_buskarli_status = false;
     String bus_karli_bus_number = null;
+    BusRoutes busroute;
+    List<BusStop> stops;
     int globall=0;
     int index = 0;
     List<String> all_station;
+    TextView ETATextView;
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_route__description);
+        backbutton=(ImageView)findViewById(R.id.backarrow);
+        backbutton.bringToFront();
+        firebaseauth = FirebaseAuth.getInstance();
+        origin = (String) getIntent().getStringExtra("Origin");
+        Log.d("Recieved_Origin", "onCreate: " + origin);
+
+        Log.d("Origin in RD.java", "onCreate: " + origin);
+        LatlngLocation = (String) getIntent().getStringExtra("LatLngCurrentLocation");
+
+        busroute = (BusRoutes) getIntent().getSerializableExtra("BusRoutes");
+
+        TextView BusnoTextView = (TextView) findViewById(R.id.Busno2);
+        TextView TowardsTextView = (TextView) findViewById(R.id.EndDestination2);
+        ETATextView = (TextView) findViewById(R.id.EtaTime2);
+
+        BusnoTextView.setText(busroute.getBus_number());
+        TowardsTextView.setText(busroute.getDestination());
+        ETATextView.setText("?");
+
+        stops = busroute.getStations();
+
+        int i = 0;
+        routedescgettersList =new ArrayList<>();
+        for(BusStop stop : stops){
+            if(i == 0) {
+                routedescgettersList.add(new Routedesc_getters(stop.getStopname(), R.drawable.gps));
+            }
+            else if(i == stops.size() - 1){
+                routedescgettersList.add(new Routedesc_getters(stop.getStopname(), R.drawable.finaldest));
+            }
+            else{
+                routedescgettersList.add(new Routedesc_getters(stop.getStopname(),R.drawable.stops));
+            }
+            i++;
+        }
+
+
+
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map2);
+        mapFragment.getMapAsync(this);
+
+
+
+
+        recyclerView = findViewById(R.id.routedesc_recview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+//        routedescgettersList.add(new Routedesc_getters("OKHLA",R.drawable.gps));
+//        routedescgettersList.add(new Routedesc_getters("GOVIND PURI",R.drawable.stops));
+//        routedescgettersList.add(new Routedesc_getters("KALKAJI MANDIR",R.drawable.stops));
+//        routedescgettersList.add(new Routedesc_getters("GOVIND PURI",R.drawable.stops));
+//        routedescgettersList.add(new Routedesc_getters("KALKAJI MANDIR",R.drawable.stops));
+//        routedescgettersList.add(new Routedesc_getters("DHAULA KUAN",R.drawable.finaldest));
+
+        adapter = new RouteDescAdapter(this, routedescgettersList);
+
+        //setting adapter to recyclerview
+        recyclerView.setAdapter(adapter);
+    }
 
     public void execute(String or,String destination) throws UnsupportedEncodingException {
         onDirectionFinderStart();
@@ -185,8 +259,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
         JSONObject jsonData = new JSONObject(data);
         JSONArray jsonRoutes = jsonData.getJSONArray("routes");
 
-        for (int i = 0; i < jsonRoutes.length(); i++)
-        {
+        for (int i = 0; i < jsonRoutes.length(); i++) {
             JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
             Route route = new Route();
             JSONObject overview_polylineJson = jsonRoute.getJSONObject("overview_polyline");
@@ -197,158 +270,27 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
             JSONObject jsonDistance = jsonLeg.getJSONObject("distance");
             JSONObject jsonDuration = jsonLeg.getJSONObject("duration");
             String json_time = jsonLeg.getJSONObject("duration").getString("text");
-            ETAs.add(globall++,json_time);
+            ETAs.add(globall++, json_time);
 
 
             Log.d("ETAS", "parseJSon: " + ETAs.size());
-            if(index>=0)
-            {
+            if (index >= 0) {
                 String hello = all_station.get(index);
-                String hel[]=hello.split("\\.");
-                sendRequest(origin,hel[1]);
+                String hel[] = hello.split("\\.");
+                sendRequest(origin, hel[1]);
                 index--;
             }
 
-            if(index<0)
-            {
+            if (index < 0) {
                 send_ETA_to_database(ETAs);
             }
-
-
-
-
-
-
-//            JSONObject jsonEndLocation = jsonLeg.getJSONObject("end_location");
-//            JSONObject jsonStartLocation = jsonLeg.getJSONObject("start_location");
-//            for(int j=0;j< jsonStep.length(); j++)
-//            {
-//                DisplayRoute dr = new DisplayRoute();
-//                JSONObject current_step = jsonStep.getJSONObject(j);
-//                if(current_step.has("transit_details"))
-//                {
-//                    dr.arrival_time = current_step.getJSONObject("transit_details").getJSONObject("arrival_time").getString("text");
-//                    JSONObject jsondistance = current_step.getJSONObject("distance");
-//                    JSONObject jsonduration = current_step.getJSONObject("duration");
-//                    dr.distance = jsondistance.getString("text");
-//                    dr.duration = jsonduration.getString("text");
-//                    dr.instruction = current_step.getString("html_instructions");
-//                    dr.bus_number = current_step.getJSONObject("transit_details").getJSONObject("line").getString("short_name");
-//                    dr.no_of_stops =  current_step.getJSONObject("transit_details").getString("num_stops");
-////                    Log.d(" No of stops : ", " STOP : " + dr.no_of_stops + " " + dr.bus_number);
-//                }
-//
-//                if(!(current_step.has("transit_details")))
-//                {
-//
-//                    JSONObject jsondistance = current_step.getJSONObject("distance");
-//                    JSONObject jsonduration = current_step.getJSONObject("duration");
-//                    dr.distance = jsondistance.getString("text");
-//                    dr.duration = jsonduration.getString("text");
-//                    dr.instruction = current_step.getString("html_instructions");
-//                    dr.bus_number=null;
-//                    dr.no_of_stops = null;
-//                    dr.arrival_time = null;
-//
-//
-//                }
-//
-//                drs.add(dr);
-//
-//            }
-//
-//            route.distance = new Distance(jsonDistance.getString("text"), jsonDistance.getInt("value"));
-//            route.duration = new Duration(jsonDuration.getString("text"), jsonDuration.getInt("value"));
-//            route.endAddress = jsonLeg.getString("end_address");
-//            route.startAddress = jsonLeg.getString("start_address");
-//            route.startLocation = new LatLng(jsonStartLocation.getDouble("lat"), jsonStartLocation.getDouble("lng"));
-//            route.endLocation = new LatLng(jsonEndLocation.getDouble("lat"), jsonEndLocation.getDouble("lng"));
-//            routes.add(route);
-
         }
-
-
-
-//        onDirectionFinderSuccess(routes,drs);
-
-
     }
 
 
-//    @Override
-//    public void onDirectionFinderSuccess(final List<Route> routes, List<DisplayRoute> drs) {
-//        polylinePaths = new ArrayList<>();
-//        originMarkers = new ArrayList<>();
-//        destinationMarkers = new ArrayList<>();
-//        dbr = FirebaseDatabase.getInstance().getReference();
-//        FirebaseUser user = firebaseauth.getCurrentUser();
-//        String name = user.getDisplayName();
-//        String towards = null ;
-//        for (final Route route : routes) {
-//            Log.d("ROUTES", "in route for loop");
-//            DatabaseReference child = dbr.child("users").child(user.getDisplayName());
-//            child.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    long temp = (long) dataSnapshot.child("journey_number").getValue();
-//                    int hello = (int) temp;
-//                    String start = route.startAddress;
-//                    String destination = route.endAddress;
-//                    List<String> starters = (List<String>) dataSnapshot.child("starts").getValue();
-//                    List<String> desters = (List<String>) dataSnapshot.child("destinations").getValue();
-//                    starters.add(hello, start);
-//                    desters.add(hello, destination);
-//                    dataSnapshot.child("starts").getRef().setValue(starters);
-//                    dataSnapshot.child("destinations").getRef().setValue(desters);
-//                }
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                }
-//            });
-//        }
-//    }
 
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_route__description);
-        backbutton=(ImageView)findViewById(R.id.backarrow);
-        backbutton.bringToFront();
-        firebaseauth = FirebaseAuth.getInstance();
-        origin = (String) getIntent().getStringExtra("Origin");
-        Log.d("Recieved_Origin", "onCreate: " + origin);
-
-        Log.d("Origin in RD.java", "onCreate: " + origin);
-        if(origin == null || origin.equals(""));
-        {
-            LatlngLocation = (String) getIntent().getStringExtra("LatLngCurrentLocation");
-        }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map2);
-        mapFragment.getMapAsync(this);
-
-
-        routedescgettersList =new ArrayList<>();
-
-        recyclerView = findViewById(R.id.routedesc_recview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        routedescgettersList.add(new Routedesc_getters("OKHLA",R.drawable.gps));
-        routedescgettersList.add(new Routedesc_getters("GOVIND PURI",R.drawable.stops));
-        routedescgettersList.add(new Routedesc_getters("KALKAJI MANDIR",R.drawable.stops));
-        routedescgettersList.add(new Routedesc_getters("GOVIND PURI",R.drawable.stops));
-        routedescgettersList.add(new Routedesc_getters("KALKAJI MANDIR",R.drawable.stops));
-        routedescgettersList.add(new Routedesc_getters("DHAULA KUAN",R.drawable.finaldest));
-
-        adapter = new RouteDescAdapter(this, routedescgettersList);
-
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
-    }
 
 
     /**
@@ -372,7 +314,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
 
     public void busKARLI(View view) {
 
-        dbr = FirebaseDatabase.getInstance().getReference();
+        dbr  = FirebaseDatabase.getInstance().getReference();
         busKARLIdialog("busKARLI",Html.fromHtml(buskarlimsg));
 //        DatabaseReference buses = dbr.child("bus_routes_database").child(bus_karli_bus_number);
         Calendar calobj = Calendar.getInstance();
@@ -470,8 +412,64 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
 
     }
     private void busKAROconfirm() {
+
+
+        dbr  = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference hello = dbr.child("bus_routes_database").child(busroute.getBus_number());
+        hello.addValueEventListener(new ValueEventListener() {
+            List<String> ET = new ArrayList<>();
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ET = (List<String>) dataSnapshot.child("ETAS").getValue();
+                Log.d("Fetch_ETA", "onDataChange: " + ETAs.size());
+                ArrayList<String> stopnames = new ArrayList<>();
+                for(BusStop stop : stops){
+                    stopnames.add(stop.getStopname().toString().toLowerCase());
+                }
+                int idx = stopnames.indexOf(origin.toLowerCase());
+                if(idx == -1){
+                    final AlertDialog.Builder builderSingle = new AlertDialog.Builder(Route_Description.this);
+                    builderSingle.setIcon(R.drawable.buskarologo);
+                    builderSingle.setTitle("Select correct Bus Stop");
+                    builderSingle.setMessage("Selected bus doesn't go via your current slected origin");
+                    builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builderSingle.show();
+                }
+                else{
+                    ETATextView.setText(ET.get(idx));
+
+                }
+            }
+
+
+//            int length = stops.size();
+//            String start_Address_ETA = origin;
+//            int i = 0;
+//            String h = stops.get(i).getStopname();
+//            while(i < length && !(h.)){
+//                i++;
+//                hello = all_station.get(i);
+//            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
     private void busKARLIok() {
+        Intent intent = new Intent(this, Homepage.class);// New activity
+        startActivity(intent);
+        finish();
     }
 
     public void backbutton(View view) {
