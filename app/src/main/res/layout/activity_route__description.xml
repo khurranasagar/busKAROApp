@@ -58,12 +58,12 @@
                 android:id="@+id/Busno2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_marginLeft="10dp"
                 android:text="445A"
-                android:textColor="#000000" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/EndDestination2"
@@ -131,7 +131,7 @@
         <!--android:drawableLeft="@drawable/busfront2"-->
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buskarli"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

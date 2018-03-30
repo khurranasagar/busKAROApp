@@ -120,14 +120,8 @@ public class Destinations extends AppCompatActivity {
 
         String origin = " ";
         String destination = null ;
-
         origin=getIntent().getStringExtra("Current Location");
-
-        Log.d("HELLO", "sendRequest: " + origin);
-
-
-
-
+//        Log.d("HELLO", "sendRequest: " + origin);
         destination = "Kailash Colony";
         if(origin != null && !origin.equals(" ")) {
             try {
@@ -227,12 +221,7 @@ public class Destinations extends AppCompatActivity {
 
         String[] busstop = nearest_busstop.split(" to ");
         nearestbusstop = busstop[1];
-
         neareststop.setText(nearestbusstop);
-
-
-
-//        Log.d("NEAREST BUSSTOP", "parseJSon: " + busstop[1]);
 
     }
 
@@ -337,19 +326,23 @@ public class Destinations extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String busroute;
                 for(DataSnapshot hel : dataSnapshot.getChildren()){
-                    busroute = hel.child(key.get(i)).child("bus_number").getValue().toString();
-                    Log.d("Fuck u bitch", "onDataChange: " + busroute);
-                    r = new BusRoutes(busroute);
-                    AllRoutes.add(r);
-                    DataSnapshot dbx = hel.child(key.get(i)).child("stations");
-                    List<BusStop> stations = new ArrayList<BusStop>();
-                    i++;
-                    for(DataSnapshot stops : dbx.getChildren()){
-                        stations.add(new BusStop(stops.child("name_of_bus_stop").getValue().toString().split("\\.")[1]));
-                        AllStops.add(new BusStop(stops.child("name_of_bus_stop").getValue().toString().split("\\.")[1]));
-                        Log.d("DFUCK", "onDataChange: " + stops.child("name_of_bus_stop").getValue().toString());
+                    if(i<2)
+                    {
+                        busroute = hel.child(key.get(i)).child("bus_number").getValue().toString();
+                        Log.d("Fuck u bitch", "onDataChange: " + busroute);
+                        r = new BusRoutes(busroute);
+                        AllRoutes.add(r);
+                        DataSnapshot dbx = hel.child(key.get(i)).child("stations");
+                        List<BusStop> stations = new ArrayList<BusStop>();
+                        i++;
+                        for(DataSnapshot stops : dbx.getChildren()){
+                            stations.add(new BusStop(stops.child("name_of_bus_stop").getValue().toString().split("\\.")[1]));
+                            AllStops.add(new BusStop(stops.child("name_of_bus_stop").getValue().toString().split("\\.")[1]));
+                            Log.d("DFUCK", "onDataChange: " + stops.child("name_of_bus_stop").getValue().toString());
+                        }
+                        r.setStations(stations);
                     }
-                    r.setStations(stations);
+
                 }
                 Log.d("OK", "onDataChange: " + AllRoutes.size());
             }
