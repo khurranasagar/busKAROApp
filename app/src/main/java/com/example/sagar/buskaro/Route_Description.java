@@ -492,7 +492,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
                     builderSingle.show();
                 }
                 else{
-                    ETATextView.setText(ET.get(idx));
+                    ETATextView.setText(ET.get(ET.size() - idx));
 
                 }
             }

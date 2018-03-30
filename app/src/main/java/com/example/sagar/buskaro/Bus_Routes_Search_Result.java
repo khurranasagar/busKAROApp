@@ -67,6 +67,8 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     BusRoutes route;
     int idx;
     List<String> ET;
+    String bus_towards = null;
+    String bustowards[];
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
@@ -75,10 +77,14 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
     String bus_number = null;
+    List<BusRoutes> all_routes;
+    List<BusStop> all_station;
 
 
     RoutesAdapter adapter2;
     List<BusRoutes> routes_names;
+    List<String> key;
+    List<String> route_names;
 
 
     private void sendRequest(String ori,String desti) {
@@ -118,14 +124,21 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         DestinationBusStop = (BusStop) getIntent().getSerializableExtra("EndDestinationBusStop");
         Origin = (String) getIntent().getStringExtra("Origin");
         CurentLocLatLng = (String) getIntent().getStringExtra("LatLngCurrentLocation");
+//        all_routes = (List<BusRoutes>) getIntent().getSerializableExtra("Routes");
+        key = new ArrayList<String>();
+        key.add("-L8bGaUG6Zja4Lvd4AhJ");
+        key.add("-L8bPAYu2rAdR3ZbwyMv");
+
+        route_names = new ArrayList<>();
+        route_names.add("445A");
+        route_names.add("445STL");
+
+
+
 
         adapter2 = new RoutesAdapter(this, routes_names, Origin, CurentLocLatLng, DestinationBusStop);
 
-        try {
-            execute(Origin, DestinationBusStop.getStopname().toString());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+
         sendRequest(Origin,DestinationBusStop.getStopname());
 
 
@@ -234,14 +247,54 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
             {
                 DisplayRoute dr = new DisplayRoute();
                 JSONObject current_step = jsonStep.getJSONObject(j);
+
                 if(current_step.has("transit_details"))
                 {
+                    bus_towards = current_step.getString("html_instructions");
+                    bustowards = bus_towards.split(" towards ");
+                    bus_towards = bustowards[1];
 
                     bus_number = current_step.getJSONObject("transit_details").getJSONObject("line").getString("short_name");
+
                 }
 
 
             }
+
+            int ijk = route_names.indexOf(bus_number);
+            Log.d("GAAAAA", "parseJSon: " + bus_number + " " + bus_towards);
+            String numberbc = route_names.get(i);
+            String key1 = key.get(ijk);
+
+            DatabaseReference stations  = dbr.child("bus_routes_database").child(numberbc).child(key1).child("stations");
+            stations.addValueEventListener(new ValueEventListener() {
+                @Override
+
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int temp=0;
+                    all_station = new ArrayList<>();
+                    for(DataSnapshot helll : dataSnapshot.getChildren()){
+                        BusStop x = new BusStop(helll.child("name_of_bus_stop").getValue().toString());
+                        all_station.add(x);
+                    }
+
+                    Log.d("All_station size", "onDataChange: " + all_station.size());
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            BusRoutes r = new BusRoutes(numberbc);
+            r.setStations(all_station);
+            routes_names.clear();
+            routes_names.add(r);
+            adapter2.setfilter(routes_names);
+
+
 
 
         }

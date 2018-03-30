@@ -219,10 +219,11 @@ public class Destinations extends AppCompatActivity {
 
         }
 
-        String[] busstop = nearest_busstop.split(" to ");
-        nearestbusstop = busstop[1];
-        neareststop.setText(nearestbusstop);
-
+        if(nearest_busstop != null) {
+            String[] busstop = nearest_busstop.split(" to ");
+            nearestbusstop = busstop[1];
+            neareststop.setText(nearestbusstop);
+        }
     }
 
 
@@ -432,7 +433,7 @@ public class Destinations extends AppCompatActivity {
 //        );
         sendRequest();
 
-        adapter2 = new DestAdapter(this, destlist,neareststop, origin);
+        adapter2 = new DestAdapter(this, destlist,neareststop, origin,AllRoutes);
 
         //setting adapter to recyclerview
         recyclerView2.setAdapter(adapter2);

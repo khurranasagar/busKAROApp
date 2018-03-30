@@ -30,12 +30,14 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
     private List<Object> destlist;
     private EditText etorigin;
     private String origin;
+    private List<BusRoutes> Allroutes;
 
-    public DestAdapter(Context ctx, List<Object> destlist, EditText etorigin, String origin) {
+    public DestAdapter(Context ctx, List<Object> destlist, EditText etorigin, String origin, List<BusRoutes> Allroutes) {
         this.ctx = ctx;
         this.destlist = destlist;
         this.etorigin = etorigin;
         this.origin = origin;
+        this.Allroutes = Allroutes;
     }
 
 
@@ -95,6 +97,7 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                             intent.putExtra("EndDestinationBusStop", dest.getBusStop());
                             intent.putExtra("Origin", etorigin.getText().toString());
                             intent.putExtra("LatLngCurrentLocation", origin);
+//                          intent.putExtra("Routes",(Object) Allroutes);
                             ctx.startActivity(intent);
                         }
 
