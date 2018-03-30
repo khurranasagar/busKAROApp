@@ -548,6 +548,13 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
 
 //            for(int j=index-1;j>=0;j--)
 //            {
+
+                for(int g=0;g<(length-index - 1);g++)
+                {
+                ETAs.add(globall++,"NA");
+                }
+
+                 Thread.sleep(2000);
                 String end_ETA = all_stations.get(index-2);
                 String lol[] = end_ETA.split("\\.");
                 sendRequest(start_Address_ETA,lol[1]);
