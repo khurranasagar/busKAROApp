@@ -28,4 +28,6 @@
     <string name="popular">Popular</string>
     <string name="Feedback_title">Feedback</string>
     <string name="help_title">Help</string>
+    <string name="title_activity_favorites">Favorites</string>
+    <string name="contact">Contact Us</string>
 </resources>

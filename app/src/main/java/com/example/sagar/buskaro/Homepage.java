@@ -62,6 +62,7 @@ public class Homepage extends AppCompatActivity
         });
 
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawer.setScrimColor(getResources().getColor(android.R.color.transparent));
 
         image = (ImageView) findViewById(R.id.startDrawer);
         image.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +123,8 @@ public class Homepage extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_favorite) {
+            Intent intent2 = new Intent(Homepage.this,Favorites.class);
+            startActivity(intent2);
 
         }else if(id == R.id.nav_help) {
             Intent intent = new Intent(Homepage.this,Help.class);
