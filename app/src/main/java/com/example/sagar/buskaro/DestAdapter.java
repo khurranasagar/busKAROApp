@@ -1,6 +1,9 @@
 package com.example.sagar.buskaro;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -72,9 +75,28 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ctx,Bus_Routes_Search_Result.class);
-                        intent.putExtra("BusStop", dest.getBusStop());
-                        ctx.startActivity(intent);
+                        if(etorigin.getText().toString().equals("")){
+                            final AlertDialog.Builder builderSingle = new AlertDialog.Builder(ctx);
+                            builderSingle.setIcon(R.drawable.buskarologo);
+                            builderSingle.setTitle("Origin Location not specified");
+                            builderSingle.setMessage("Please Enter your Current/Nearest Bus Stop first");
+                            builderSingle.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener(){
+                                        @SuppressLint("LongLogTag")
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builderSingle.show();
+                        }
+                        else {
+                            Intent intent = new Intent(ctx, Bus_Routes_Search_Result.class);
+                            intent.putExtra("EndDestinationBusStop", dest.getBusStop());
+                            intent.putExtra("Origin", etorigin.getText().toString());
+                            intent.putExtra("LatLngCurrentLocation", origin);
+                            ctx.startActivity(intent);
+                        }
 
                     }
                 });
@@ -91,13 +113,21 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ctx,Route_Description.class);
-                        intent.putExtra("BusRoutes",dest2.getBusRoute());
-                        intent.putExtra("Origin",etorigin.getText().toString());
-                        intent.putExtra("LatLngCurrentLocation", origin);
-                        Log.d("Origin Text Intent", "onClick: " + etorigin.getText().toString());
-                        ctx.startActivity(intent);
-
+                        if(etorigin.getText().toString().equals("")){
+                            Intent intent = new Intent(ctx, Route_Description.class);
+                            intent.putExtra("BusRoutes", dest2.getBusRoute());
+                            intent.putExtra("Origin", dest2.getBusRoute().getOrigin());
+                            intent.putExtra("LatLngCurrentLocation", origin);
+                            ctx.startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(ctx, Route_Description.class);
+                            intent.putExtra("BusRoutes", dest2.getBusRoute());
+                            intent.putExtra("Origin", etorigin.getText().toString());
+                            intent.putExtra("LatLngCurrentLocation", origin);
+                            Log.d("Origin Text Intent", "onClick: " + etorigin.getText().toString());
+                            ctx.startActivity(intent);
+                        }
                     }
                 });
                 break;
