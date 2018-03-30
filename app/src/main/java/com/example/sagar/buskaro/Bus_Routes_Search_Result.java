@@ -74,10 +74,26 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
+    String bus_number = null;
 
 
     RoutesAdapter adapter2;
     List<BusRoutes> routes_names;
+
+
+    private void sendRequest(String ori,String desti) {
+
+        String origin = ori;
+        String destination = desti ;
+
+        try {
+            execute(origin, destination);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +126,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        sendRequest(Origin,DestinationBusStop.getStopname());
 
 
     }
@@ -205,25 +222,31 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         JSONObject jsonData = new JSONObject(data);
         JSONArray jsonRoutes = jsonData.getJSONArray("routes");
 
-        for (int i = 0; i < jsonRoutes.length(); i++) {
+
+        for (int i = 0; i < jsonRoutes.length(); i++)
+        {
             JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
-            Route route = new Route();
-            JSONObject overview_polylineJson = jsonRoute.getJSONObject("overview_polyline");
             JSONArray jsonLegs = jsonRoute.getJSONArray("legs");
             JSONObject jsonSteps = jsonLegs.getJSONObject(0);
-            JSONObject jsonLeg = jsonLegs.getJSONObject(0);
             JSONArray jsonStep = jsonSteps.getJSONArray("steps");
-            JSONObject jsonDistance = jsonLeg.getJSONObject("distance");
-            JSONObject jsonDuration = jsonLeg.getJSONObject("duration");
-            String json_time = jsonLeg.getJSONObject("duration").getString("text");
-            JSONObject jsonEndLocation = jsonLeg.getJSONObject("end_location");
-            JSONObject jsonStartLocation = jsonLeg.getJSONObject("start_location");
+
+            for(int j=0;j< jsonStep.length(); j++)
+            {
+                DisplayRoute dr = new DisplayRoute();
+                JSONObject current_step = jsonStep.getJSONObject(j);
+                if(current_step.has("transit_details"))
+                {
+
+                    bus_number = current_step.getJSONObject("transit_details").getJSONObject("line").getString("short_name");
+                }
+
+
+            }
 
 
         }
 
-
-//        Log.d("NEAREST BUSSTOP", "parseJSon: " + busstop[1]);
+        Log.d("Busnumber used", "parseJSon: " + bus_number);
 
     }
 
