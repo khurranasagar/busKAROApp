@@ -18,13 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".StartScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".Homepage" />
         <activity android:name=".SignIn" />
         <activity
@@ -79,9 +73,19 @@
         <activity android:name=".Help" />
         <activity
             android:name=".Favorites"
-            android:label="@string/title_activity_favorites"
             android:hardwareAccelerated="true"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_favorites"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".StartScreen">
+
+        </activity>
     </application>
 
 </manifest>

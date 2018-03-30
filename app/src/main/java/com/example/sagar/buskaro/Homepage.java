@@ -36,8 +36,6 @@ public class Homepage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-
-
         FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.myLocation);
         FAB.setVisibility(View.GONE);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
