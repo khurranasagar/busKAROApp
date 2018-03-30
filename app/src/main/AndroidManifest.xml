@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sagar.buskaro">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -75,7 +76,12 @@
             android:label="@string/title_activity_route__description" />
         <activity android:name=".feedbackpage" />
         <activity android:name=".Account" />
-        <activity android:name=".Help"></activity>
+        <activity android:name=".Help" />
+        <activity
+            android:name=".Favorites"
+            android:label="@string/title_activity_favorites"
+            android:hardwareAccelerated="true"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

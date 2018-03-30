@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import Modules.BusRoutes;
+
 /**
  * Created by Sagar on 3/27/2018.
  */
@@ -18,9 +20,9 @@ import java.util.List;
 public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RouteViewHolder> {
 
     private Context ctx;
-    private List<String> Routes;
+    private List<BusRoutes> Routes;
 
-    public RoutesAdapter(Context ctx, List<String> Routes) {
+    public RoutesAdapter(Context ctx, List<BusRoutes> Routes) {
         this.ctx = ctx;
         this.Routes = Routes;
     }
@@ -35,7 +37,8 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RouteViewH
 
     @Override
     public void onBindViewHolder(RoutesAdapter.RouteViewHolder holder, int position) {
-        holder.BusName.setText(Routes.get(position));
+        holder.BusName.setText(Routes.get(position).getBus_number().toString());
+        holder.End_Destination.setText(Routes.get(position).getDestination());
     }
 
     @Override
@@ -53,6 +56,14 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RouteViewH
             BusName = (TextView) itemView.findViewById(R.id.Busno);
             End_Destination = (TextView) itemView.findViewById(R.id.EndDestination);
         }
+    }
+
+    public void setfilter(List<BusRoutes> filteredDests){
+
+        Routes  = new ArrayList<BusRoutes>();
+        Routes.addAll(filteredDests);
+        notifyDataSetChanged();
+
     }
 
 

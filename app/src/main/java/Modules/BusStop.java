@@ -15,6 +15,7 @@ public class BusStop implements Serializable {
 
     public BusStop(String stop_name){
         this.name_of_bus_stop = stop_name;
+
     }
 
     public String getStopname(){

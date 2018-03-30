@@ -16,6 +16,8 @@ public class Help extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.help_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getFragmentManager().beginTransaction().replace(R.id.main, new HelpFragMain()).commit();
     }
 
     public boolean onSupportNavigateUp() {

@@ -318,6 +318,8 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
         backbutton.bringToFront();
         firebaseauth = FirebaseAuth.getInstance();
         origin = (String) getIntent().getStringExtra("Origin");
+        Log.d("Recieved_Origin", "onCreate: " + origin);
+
         Log.d("Origin in RD.java", "onCreate: " + origin);
         if(origin == null || origin.equals(""));
         {
