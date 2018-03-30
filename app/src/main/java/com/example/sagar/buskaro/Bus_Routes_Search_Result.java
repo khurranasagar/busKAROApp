@@ -27,6 +27,11 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,12 +57,16 @@ import Modules.Route;
 public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private String buskaromsg="To find ETAs for the next 10 minutes, <b>3 busKARO</b> credits will be deducted.";
+    private String buskaromsg = "To find ETAs for the next 10 minutes, <b>3 busKARO</b> credits will be deducted.";
     RecyclerView SearchResultsRecyclerView;
-    private static final String TAG="Bus_Routes_";
+    private static final String TAG = "Bus_Routes_";
     String CurentLocLatLng;
     String Origin;
     BusStop DestinationBusStop;
+    private DatabaseReference dbr;
+    BusRoutes route;
+    int idx;
+    List<String> ET;
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
@@ -65,10 +74,26 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
+    String bus_number = null;
 
 
     RoutesAdapter adapter2;
     List<BusRoutes> routes_names;
+
+
+    private void sendRequest(String ori,String desti) {
+
+        String origin = ori;
+        String destination = desti ;
+
+        try {
+            execute(origin, destination);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +111,6 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
 
         routes_names = new ArrayList<>();
 
-        adapter2 = new RoutesAdapter(this, routes_names);
 
         //setting adapter to recyclerview
         SearchResultsRecyclerView.setAdapter(adapter2);
@@ -95,26 +119,28 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         Origin = (String) getIntent().getStringExtra("Origin");
         CurentLocLatLng = (String) getIntent().getStringExtra("LatLngCurrentLocation");
 
+        adapter2 = new RoutesAdapter(this, routes_names, Origin, CurentLocLatLng, DestinationBusStop);
 
         try {
-            execute(Origin,DestinationBusStop.getStopname().toString());
+            execute(Origin, DestinationBusStop.getStopname().toString());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        sendRequest(Origin,DestinationBusStop.getStopname());
 
 
     }
 
-    public void execute(String or,String destination) throws UnsupportedEncodingException {
+    public void execute(String or, String destination) throws UnsupportedEncodingException {
         onDirectionFinderStart();
-        new Bus_Routes_Search_Result.DownloadRawData().execute(createUrl(or,destination));
+        new Bus_Routes_Search_Result.DownloadRawData().execute(createUrl(or, destination));
     }
 
-    private String createUrl(String origin,String destination) throws UnsupportedEncodingException {
+    private String createUrl(String origin, String destination) throws UnsupportedEncodingException {
         String urlOrigin = URLEncoder.encode(origin, "utf-8");
         Log.d("Hey Baaby", "createUrl: " + urlOrigin);
         String urlDestination = URLEncoder.encode(destination, "utf-8");
-        String URL = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination +"&mode=transit&transit_mode=bus"  +"&key=" + GOOGLE_API_KEY;
+        String URL = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&mode=transit&transit_mode=bus" + "&key=" + GOOGLE_API_KEY;
         Log.d("URL ", "createUrl: " + URL);
         return URL;
     }
@@ -140,7 +166,6 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
             }
         }
     }
-
 
 
     public void backbutton(View view) {
@@ -197,30 +222,31 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         JSONObject jsonData = new JSONObject(data);
         JSONArray jsonRoutes = jsonData.getJSONArray("routes");
 
+
         for (int i = 0; i < jsonRoutes.length(); i++)
         {
             JSONObject jsonRoute = jsonRoutes.getJSONObject(i);
-            Route route = new Route();
-            JSONObject overview_polylineJson = jsonRoute.getJSONObject("overview_polyline");
             JSONArray jsonLegs = jsonRoute.getJSONArray("legs");
             JSONObject jsonSteps = jsonLegs.getJSONObject(0);
-            JSONObject jsonLeg = jsonLegs.getJSONObject(0);
             JSONArray jsonStep = jsonSteps.getJSONArray("steps");
-            JSONObject jsonDistance = jsonLeg.getJSONObject("distance");
-            JSONObject jsonDuration = jsonLeg.getJSONObject("duration");
-            String json_time = jsonLeg.getJSONObject("duration").getString("text");
-            JSONObject jsonEndLocation = jsonLeg.getJSONObject("end_location");
-            JSONObject jsonStartLocation = jsonLeg.getJSONObject("start_location");
 
+            for(int j=0;j< jsonStep.length(); j++)
+            {
+                DisplayRoute dr = new DisplayRoute();
+                JSONObject current_step = jsonStep.getJSONObject(j);
+                if(current_step.has("transit_details"))
+                {
+
+                    bus_number = current_step.getJSONObject("transit_details").getJSONObject("line").getString("short_name");
+                }
+
+
+            }
 
 
         }
 
-
-
-
-
-//        Log.d("NEAREST BUSSTOP", "parseJSon: " + busstop[1]);
+        Log.d("Busnumber used", "parseJSon: " + bus_number);
 
     }
 
@@ -238,8 +264,8 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        Marker m1 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this,Origin)).title(Origin));
-        Marker m2 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this,DestinationBusStop.getStopname())).title(DestinationBusStop.getStopname()));
+        Marker m1 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this, Origin)).title(Origin));
+        Marker m2 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this, DestinationBusStop.getStopname())).title(DestinationBusStop.getStopname()));
         m1.showInfoWindow();
         m2.showInfoWindow();
 
@@ -271,7 +297,6 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     }
 
 
-
     public LatLng getLocationFromAddress(Context context, String strAddress) {
 
         Geocoder coder = new Geocoder(context);
@@ -286,7 +311,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
             }
 
             Address location = address.get(0);
-            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
 
         } catch (IOException ex) {
 
@@ -300,30 +325,30 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         busKAROdialog("busKARO", Html.fromHtml(buskaromsg));
     }
 
-    public void busKAROdialog(String title, Spanned message){
+    public void busKAROdialog(String title, Spanned message) {
         final AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
         builderSingle.setIcon(R.drawable.buskarologo);
         builderSingle.setTitle(title);
         builderSingle.setMessage(message);
         builderSingle.setNegativeButton(
                 "Cancel",
-                new DialogInterface.OnClickListener(){
+                new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG,"buskaro Cancel called");
+                        Log.d(TAG, "buskaro Cancel called");
                         busKAROcancel();
 
                     }
                 });
         builderSingle.setPositiveButton(
                 "Confirm",
-                new DialogInterface.OnClickListener(){
+                new DialogInterface.OnClickListener() {
 
                     @SuppressLint("LongLogTag")
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG,"Confirm called");
+                        Log.d(TAG, "Confirm called");
                         busKAROconfirm();
 
                     }
@@ -335,6 +360,42 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     private void busKAROcancel() {
 
     }
+
     private void busKAROconfirm() {
+
+        dbr = FirebaseDatabase.getInstance().getReference();
+        int i = 0;
+        for(i= 0; i< routes_names.size(); i++) {
+            route = routes_names.get(i);
+            DatabaseReference hello = dbr.child("bus_routes_database").child(route.getBus_number());
+            hello.addValueEventListener(new ValueEventListener() {
+
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    ET = (List<String>) dataSnapshot.child("ETAS").getValue();
+                    ArrayList<String> stopnames = new ArrayList<>();
+                    for (BusStop stop : route.getStations()) {
+                        stopnames.add(stop.getStopname().toString().toLowerCase());
+                    }
+                    idx = stopnames.indexOf(Origin.toLowerCase());
+                    route.setETAs(ET);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+
+
+            });
+            routes_names.clear();
+            routes_names.add(route);
+            adapter2.setfilter(routes_names);
+
+        }
     }
 }

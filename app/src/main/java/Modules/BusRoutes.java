@@ -51,6 +51,14 @@ public class BusRoutes implements Serializable {
         return stations;
     }
 
+    public void setETAs(List<String> ET){
+        this.ETAs = ET;
+    }
+
+    public List<String> getETAs(){
+        return ETAs;
+    }
+
 
 
 

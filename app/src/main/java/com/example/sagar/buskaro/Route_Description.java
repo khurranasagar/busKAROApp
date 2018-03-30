@@ -1,8 +1,11 @@
 package com.example.sagar.buskaro;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -16,11 +19,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -306,10 +311,56 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        Marker m1 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this,origin)).title(origin));
+        Marker m2 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this,busroute.getDestination())).title(busroute.getDestination()));
+        m1.showInfoWindow();
+        m2.showInfoWindow();
+
+        List<Marker> markers = new ArrayList<>();
+        markers.add(m1);
+        markers.add(m2);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Marker marker : markers) {
+            builder.include(marker.getPosition());
+        }
+
+
+        final LatLngBounds bounds = builder.build();
+
+        int padding = 0; // offset from edges of the map in pixels
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+            }
+        });
+    }
+
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+
+            Address location = address.get(0);
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
+
+        return p1;
     }
 
     public void busKARLI(View view) {
