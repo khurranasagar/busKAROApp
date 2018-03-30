@@ -9,8 +9,10 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -66,7 +68,7 @@ import Modules.Distance;
 import Modules.Duration;
 import Modules.Route;
 
-public class Route_Description extends FragmentActivity implements OnMapReadyCallback {
+public class Route_Description extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private String buskaromsg="To find ETAs for the next 10 minutes, <b>3 busKARO</b> credits will be deducted.";
@@ -101,6 +103,7 @@ public class Route_Description extends FragmentActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route__description);
+
         backbutton=(ImageView)findViewById(R.id.backarrow);
         backbutton.bringToFront();
         firebaseauth = FirebaseAuth.getInstance();

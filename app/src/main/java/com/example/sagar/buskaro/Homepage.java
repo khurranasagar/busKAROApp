@@ -131,6 +131,17 @@ public class Homepage extends AppCompatActivity
             Intent intent2 = new Intent(Homepage.this,feedbackpage.class);
             startActivity(intent2);
         }else if(id == R.id.nav_share){
+            try {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "busKARO");
+                String sAux = "\nPlease spread BBI event as widely as possible\n\n";
+                sAux = sAux + "https://www.facebook.com/events/564177907285068/";
+                i.putExtra(Intent.EXTRA_TEXT, sAux);
+                startActivity(Intent.createChooser(i, "choose one"));
+            } catch(Exception e) {
+                //e.toString();
+            }
 
         }else if(id == R.id.nav_logout){
 

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -39,6 +40,12 @@ public class FavDestAdapter extends RecyclerView.Adapter<FavDestAdapter.FavDestV
         //getting the product of the specified position
         FavDest product = buslist.get(position);
         holder.fav_dest.setText(product.getFav_dest());
+        holder.dustbin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         }
 
 
@@ -51,10 +58,12 @@ public class FavDestAdapter extends RecyclerView.Adapter<FavDestAdapter.FavDestV
     class FavDestViewHolder extends RecyclerView.ViewHolder {
 
         TextView fav_dest;
+        ImageView dustbin;
 
         public FavDestViewHolder(View itemView) {
             super(itemView);
             fav_dest = itemView.findViewById(R.id.EndDestination_fav2);
+            dustbin=itemView.findViewById(R.id.dustbin2);
 
         }
     }

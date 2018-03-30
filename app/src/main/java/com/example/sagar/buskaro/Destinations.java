@@ -430,7 +430,8 @@ public class Destinations extends AppCompatActivity {
 //        destlist.add(
 //                new Dest2(R.drawable.favorite2,"Rajiv Chowk","611A","Dhaula Kuan")
 //        );
-        sendRequest();
+
+//        sendRequest();
 
         adapter2 = new DestAdapter(this, destlist,neareststop, origin);
 

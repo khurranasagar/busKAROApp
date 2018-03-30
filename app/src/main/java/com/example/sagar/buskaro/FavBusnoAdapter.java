@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -42,6 +43,12 @@ public class FavBusnoAdapter extends RecyclerView.Adapter<FavBusnoAdapter.FavBus
         //binding the data with the viewholder views
         holder.fav_busno.setText(product.getFav_busno());
         holder.fav_dest.setText(product.getFav_dest());
+        holder.dustbin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -55,10 +62,12 @@ public class FavBusnoAdapter extends RecyclerView.Adapter<FavBusnoAdapter.FavBus
     class FavBusNoViewHolder extends RecyclerView.ViewHolder {
 
         TextView fav_busno,fav_dest;
+        ImageView dustbin;
 
         public FavBusNoViewHolder(View itemView) {
             super(itemView);
 
+            dustbin=itemView.findViewById(R.id.dustbin);
             fav_busno = itemView.findViewById(R.id.Busno_fav1);
             fav_dest = itemView.findViewById(R.id.EndDestination_fav1);
 

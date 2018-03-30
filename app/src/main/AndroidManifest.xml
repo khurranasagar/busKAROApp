@@ -19,15 +19,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".Homepage" />
-        <activity android:name=".SignIn" />
+        <activity android:name=".Homepage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignIn"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MapsActivity2"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SlideActivity"
             android:label="@string/title_activity_slide"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -39,17 +44,21 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
+
             android:value="@string/google_maps_key" />
 
         <activity
             android:name=".HomeScreen"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_home_screen" />
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_home_screen"
+            android:screenOrientation="portrait"
             android:parentActivityName=".HomeScreen" />
         <activity
             android:name=".Destinations"
+            android:screenOrientation="portrait"
             android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -60,30 +69,38 @@
                 android:resource="@xml/destinationscreensearchable" />
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".Bus_Routes_Search_Result"
             android:hardwareAccelerated="true"
             android:label="@string/title_activity_bus__routes__search__result" />
         <activity android:name=".Buses" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Route_Description"
             android:hardwareAccelerated="true"
             android:label="@string/title_activity_route__description" />
-        <activity android:name=".feedbackpage" />
-        <activity android:name=".Account" />
-        <activity android:name=".Help" />
+        <activity android:name=".feedbackpage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Account"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Help"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Favorites"
             android:hardwareAccelerated="true"
             android:label="@string/title_activity_favorites"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StartScreen">
+        <activity android:name=".StartScreen"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

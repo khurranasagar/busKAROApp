@@ -29,6 +29,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
+            android:elevation="10dp"
             android:clickable="true"
             android:onClick="backbutton"
             app:srcCompat="@drawable/backarrow" />
