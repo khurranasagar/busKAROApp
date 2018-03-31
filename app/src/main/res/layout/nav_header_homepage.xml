@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorSecondary"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="7 credits"
+        android:id="@+id/creditid"
         android:textAlignment="textEnd"
         android:textSize="14sp"
         tools:ignore="RtlCompat" />

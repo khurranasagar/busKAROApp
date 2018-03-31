@@ -12,10 +12,10 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/buskarosquare"
+        android:icon="@mipmap/buskaroicon"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/buskarocircle"
+        android:roundIcon="@mipmap/buskaroicon2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
