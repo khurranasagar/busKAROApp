@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/screen1_3"
     tools:context="com.example.sagar.buskaro.SlideActivity">
 
     <Button
@@ -16,7 +16,7 @@
         android:layout_alignTop="@+id/prevbt"
         android:background="?attr/selectableItemBackground"
         android:text="NEXT"
-        android:textColor="@color/colorTransparentWhite"
+        android:textColor="@color/colorSecondary"
         android:visibility="visible" />
 
     <Button
@@ -27,12 +27,12 @@
         android:layout_alignParentStart="true"
         android:background="?attr/selectableItemBackground"
         android:text="BACK"
-        android:textColor="@color/colorTransparentWhite"
+        android:textColor="@color/colorSecondary"
         android:visibility="invisible" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/slideviewpager"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/dotsLayout"
         android:layout_alignParentStart="true"

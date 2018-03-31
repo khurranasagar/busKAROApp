@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/screen1_2"
+        android:background="@drawable/screen1_3"
     tools:context="com.example.sagar.buskaro.StartScreen">
 
         <ImageView
@@ -13,19 +13,21 @@
             android:layout_height="250dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             app:srcCompat="@drawable/final_logo" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/startbutton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="32dp"
-            android:text="Plan you travel with Live Bus Timings"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/startbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:text="Plan you travel with Live Bus Timings"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:typeface="serif" />
 
         <Button
             android:id="@+id/startbutton"

@@ -1,6 +1,7 @@
 package com.example.sagar.buskaro;
 
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void addDotsIndicator(int position)
     {
-        mDots = new TextView[3];
+        mDots = new TextView[4];
         mDotLayout.removeAllViews();
         for(int i=0 ; i<mDots.length ;i++)
         {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.newgray));
             mDotLayout.addView(mDots[i]);
 
 
@@ -80,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onPageScrolled(int i, float v, int i1) {
 
+            if(i==3)
+            {
+                Intent intent = new Intent(MainActivity.this,SignIn.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
 
         @Override
@@ -94,13 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 prvbt.setVisibility(View.INVISIBLE);
                 nxbt.setText("Next");
                 prvbt.setText("");
-            }else if(i==mDots.length-1)
-            {
-                nxbt.setEnabled(true);
-                prvbt.setEnabled(true);
-                prvbt.setVisibility(View.VISIBLE);
-                nxbt.setText("");
-                prvbt.setText("Back");
             }
             else
             {

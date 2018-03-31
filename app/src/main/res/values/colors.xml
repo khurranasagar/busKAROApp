@@ -5,16 +5,16 @@
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
-    <color name="colorPrimary">#7f0000</color>
+    <color name="colorPrimary">#006c77</color>
     <!--<color name="colorPrimary">#11cbd7</color>-->
-    <color name="colorPrimaryDark">#4e0000</color>
+    <color name="colorPrimaryDark">#03353e</color>
     <color name="colorAccent">#222454</color>
     <!--<color name="colorWhite">#FFFFFF</color>-->
     <color name="colorTransparentWhite">#ffffff</color>
     <color name="colorWhite">#d9d9d9</color>
     <color name="colorBlack">#2b2a2a</color>
     <!--<color name="neworange">#005E7C</color>-->
-    <color name="colorSecondary">#448aff</color>
+    <color name="colorSecondary">#c1403d</color>
 </resources>
 
 

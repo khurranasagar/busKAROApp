@@ -14,6 +14,19 @@
     <!--android:background="@android:color/black"-->
     <!--tools:context="com.jijith.gifanimation.MainActivity">-->
 
+    <TextView
+        android:id="@+id/slide_upper"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:typeface="sans" />
+
 
     <ImageView
         android:id="@+id/slide_image"
@@ -22,40 +35,29 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/aa" />
 
-    <TextView
-        android:id="@+id/slide_upper"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="85dp"
-        android:gravity="center"
-        android:text="TextView"
-        android:textColor="@color/colorWhite"
-        android:textSize="24sp"
-         />
 
     <TextView
         android:id="@+id/slide_text"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="200dp"
         android:gravity="center"
-        android:textColor="@color/colorWhite"
         android:text="TextView"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-         />
+        android:typeface="serif" />
 
     <Button
         android:id="@+id/signupbt"
         android:layout_width="180dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/start_button"
         android:text="Go to sign in page"
         android:textColor="@color/colorTransparentWhite"

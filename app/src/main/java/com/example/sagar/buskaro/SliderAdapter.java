@@ -25,13 +25,13 @@ public class SliderAdapter extends android.support.v4.view.PagerAdapter{
         this.context=context;
     }
 
-    public int[] slides_images = {R.drawable.aa,R.drawable.yoo1,R.drawable.busandman};
+    public int[] slides_images = {R.drawable.aa,R.drawable.busstop2,R.drawable.busstop3,R.drawable.busstop3};
 
     public String[] slides_heading={ "Plan your bus journey with bus route and timings","Use busKaro credits to track your bus with live ETA's ",
-            "Share the status of your bus anonymously to earn busKARO credits"
+            "Share the status of your bus anonymously to earn busKARO credits","Share the status of your bus anonymously to earn busKARO credits"
     };
 
-    public String[] slides_upper = {"PLAN","BUSKARO","BUSKARLI"};
+    public String[] slides_upper = {"PLAN","BUSKARO","BUSKARLI","BUSKARLI"};
 
     @Override
     public int getCount() {
@@ -70,16 +70,9 @@ public class SliderAdapter extends android.support.v4.view.PagerAdapter{
                 context.startActivity(intent);
             }
         });
-        if(position==2)
-        {
-            signInButton.setVisibility(View.VISIBLE);
 
-
-        }
-        else
-        {
             signInButton.setVisibility(View.GONE);
-        }
+
 
 
 
