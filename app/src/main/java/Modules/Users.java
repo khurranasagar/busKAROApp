@@ -24,7 +24,7 @@ public class Users {
         bus_numbers_used_order = new Hashtable<String, Integer>();
         starts = new ArrayList<String>();
         destinations = new ArrayList<String>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             starts.add("nothing");
             destinations.add("nothing");
         }
@@ -32,6 +32,12 @@ public class Users {
         journey_number = 0;
         buskaro_credits = 5;
 
+    }
+    public int getbkcredits(){
+        return buskaro_credits;
+    }
+    public void setBuskaro_credits(int bk){
+        this.buskaro_credits = bk;
     }
 
 }

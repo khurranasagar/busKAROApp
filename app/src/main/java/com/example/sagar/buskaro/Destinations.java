@@ -390,23 +390,25 @@ public class Destinations extends AppCompatActivity {
         favourite_Bus_numbers = new ArrayList<>();
 
 
-        favourite_Bus_numbers.add(new BusRoutes("511A"));
-        Recent_Bus_numbers.add(new BusRoutes("611A"));
+        favourite_Bus_numbers.add(new BusRoutes("445A"));
+        Recent_Bus_numbers.add(new BusRoutes("511A"));
         favourite_Destinations.add(new BusStop("Kailash Colony"));
-        Recent_Destinations.add(new BusStop("Rajouri Garden"));
+        Recent_Destinations.add(new BusStop("Amir Khusro Park"));
 
         for(int i=0;i<favourite_Destinations.size();i++){
             destlist.add(new Dest(R.drawable.favorite2,favourite_Destinations.get(i)));
         }
-        for(int i=0;i<Recent_Bus_numbers.size();i++){
-            destlist.add(new Dest2(R.drawable.clock,Recent_Bus_numbers.get(i)));
-        }
+
         for(int i=0;i<Recent_Destinations.size();i++){
             destlist.add(new Dest(R.drawable.clock,Recent_Destinations.get(i)));
+        }
+        for(int i=0;i<Recent_Bus_numbers.size();i++){
+            destlist.add(new Dest2(R.drawable.clock,Recent_Bus_numbers.get(i)));
         }
         for(int i=0;i<favourite_Bus_numbers.size();i++){
             destlist.add(new Dest2(R.drawable.favorite2,favourite_Bus_numbers.get(i)));
         }
+
 
 
 

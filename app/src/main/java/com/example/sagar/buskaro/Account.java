@@ -9,13 +9,20 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import Modules.Users;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Account extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private DatabaseReference dbr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,24 @@ public class Account extends AppCompatActivity {
         CircleImageView dp=findViewById(R.id.imageView13);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+        final TextView credlele = findViewById(R.id.textView22);
+
+        dbr = FirebaseDatabase.getInstance().getReference();
+        Users us;
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference vc = dbr.child("users").child(user.getDisplayName());
+        vc.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long x =(long) dataSnapshot.child("buskaro_credits").getValue();
+                credlele.setText(Long.toString(x) + " credits");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         Uri uri = firebaseUser.getPhotoUrl();
         String str = firebaseUser.getDisplayName();
         String[] splitStr = str.split("\\s+");
