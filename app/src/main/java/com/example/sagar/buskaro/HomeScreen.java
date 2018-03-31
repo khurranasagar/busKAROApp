@@ -111,7 +111,9 @@ public class HomeScreen extends AppCompatActivity implements OnMapReadyCallback,
         rlp.setMargins(0, 0, 30, 150);
         mapFragment.getMapAsync(this);
 
-        writeNewUser();
+
+
+
 //        try {
 //            writeNewRoutes();
 //        } catch (IOException e) {

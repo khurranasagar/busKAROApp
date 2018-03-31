@@ -54,7 +54,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
-                android:text="2 min"
+                android:text="\\?"
                 android:textSize="18sp" />
 
         </RelativeLayout>

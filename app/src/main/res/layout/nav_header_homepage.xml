@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:id="@+id/credid"
         android:text="7 credits"
         android:id="@+id/creditid"
         android:textAlignment="textEnd"

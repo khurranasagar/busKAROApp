@@ -67,6 +67,7 @@ import Modules.DisplayRoute;
 import Modules.Distance;
 import Modules.Duration;
 import Modules.Route;
+import Modules.Users;
 
 public class Route_Description extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -215,6 +216,12 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+    private void writeNewUser(Users us) {
+        dbr = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = firebaseauth.getCurrentUser();
+        dbr.child("users").child(user.getDisplayName()).setValue(us);
+        Log.d("User", "writeNewUser: " + user.getDisplayName());
     }
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {
@@ -496,6 +503,12 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
                 }
                 else{
                     ETATextView.setText(ET.get(ET.size() - idx-1));
+                    Users us = new Users();
+                    int c = us.getbkcredits();
+                    c = c - 3;
+                    us.setBuskaro_credits(c);
+                    writeNewUser(us);
+
 
                 }
             }
@@ -521,6 +534,11 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
 
     }
     private void busKARLIok() {
+        Users us = new Users();
+        int c = us.getbkcredits();
+        c = c + 5;
+        us.setBuskaro_credits(c);
+        writeNewUser(us);
         Intent intent = new Intent(this, Homepage.class);// New activity
         startActivity(intent);
         finish();

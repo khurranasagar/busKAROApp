@@ -97,7 +97,8 @@ public class DestAdapter extends RecyclerView.Adapter<DestAdapter.DestViewHolder
                             intent.putExtra("EndDestinationBusStop", dest.getBusStop());
                             intent.putExtra("Origin", etorigin.getText().toString());
                             intent.putExtra("LatLngCurrentLocation", origin);
-//                          intent.putExtra("Routes",(Object) Allroutes);
+                            BusRoutes r = Allroutes.get(0);
+                            intent.putExtra("445A", r);
                             ctx.startActivity(intent);
                         }
 

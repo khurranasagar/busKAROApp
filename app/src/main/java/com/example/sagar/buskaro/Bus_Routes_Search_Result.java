@@ -71,6 +71,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     List<String> ET;
     String bus_towards = null;
     String bustowards[];
+    BusRoutes r445;
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
     private static final String GOOGLE_API_KEY = "AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU";
@@ -120,18 +121,21 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         SearchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         routes_names = new ArrayList<>();
+        //routes_names.add(new BusRoutes("445A"));
 
 
         //setting adapter to recyclerview
-        SearchResultsRecyclerView.setAdapter(adapter2);
+
 
         DestinationBusStop = (BusStop) getIntent().getSerializableExtra("EndDestinationBusStop");
         Origin = (String) getIntent().getStringExtra("Origin");
         CurentLocLatLng = (String) getIntent().getStringExtra("LatLngCurrentLocation");
 //        all_routes = (List<BusRoutes>) getIntent().getSerializableExtra("Routes");
+        r445 = (BusRoutes) getIntent().getSerializableExtra("445A");
         key = new ArrayList<String>();
         key.add("-L8bGaUG6Zja4Lvd4AhJ");
         key.add("-L8bPAYu2rAdR3ZbwyMv");
+
 
         route_names = new ArrayList<>();
         route_names.add("445A");
@@ -142,6 +146,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
 
         adapter2 = new RoutesAdapter(this, routes_names, Origin, CurentLocLatLng, DestinationBusStop);
 
+        SearchResultsRecyclerView.setAdapter(adapter2);
 
         sendRequest(Origin,DestinationBusStop.getStopname());
 
@@ -265,6 +270,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
 
 
             }
+            bus_number = "445A";
 
             Log.d("GAAAAA", "parseJSon: " + bus_number + " " + bus_towards);
 
@@ -274,11 +280,17 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
             String numberbc = route_names.get(i);
             String key1 = key.get(ijk);
 
+            Log.d("SEDN NUDES", "parseJSon: " + bus_number + " " + key1 + " " + numberbc);
+
+            dbr = FirebaseDatabase.getInstance().getReference();
+
             DatabaseReference stations  = dbr.child("bus_routes_database").child(numberbc).child(key1).child("stations");
+            Log.d("HEHE", "parseJSon: OK" + stations.toString());
             stations.addValueEventListener(new ValueEventListener() {
                 @Override
 
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.d("GGGG", "onDataChange: " + dataSnapshot.toString());
                     int temp=0;
                     all_station = new ArrayList<>();
                     for(DataSnapshot helll : dataSnapshot.getChildren()){
@@ -299,7 +311,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
             BusRoutes r = new BusRoutes(numberbc);
             r.setStations(all_station);
             routes_names.clear();
-            routes_names.add(r);
+            routes_names.add(r445);
             adapter2.setfilter(routes_names);
 
 
