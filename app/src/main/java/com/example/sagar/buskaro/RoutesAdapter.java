@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,7 @@ public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.RouteViewH
     public void setfilter(List<BusRoutes> filteredDests){
 
         Routes  = new ArrayList<BusRoutes>();
+        Log.d("CHOOT MAROON", "setfilter: " + filteredDests.get(0).getBus_number());
         Routes.addAll(filteredDests);
         notifyDataSetChanged();
 

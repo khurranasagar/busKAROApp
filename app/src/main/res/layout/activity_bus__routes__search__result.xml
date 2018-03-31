@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:id="@+id/Relat">
-
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,13 +25,12 @@
             android:onClick="backbutton"
             app:srcCompat="@drawable/backarrow2" />
 
-    </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/routesoptions"
         android:layout_width="match_parent"
         android:layout_marginBottom="60dp"
-        android:layout_below="@+id/Relat"
+        android:layout_below="@+id/map"
         android:layout_height="match_parent" />
 
 
