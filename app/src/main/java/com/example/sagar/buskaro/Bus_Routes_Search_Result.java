@@ -16,6 +16,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,6 +62,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     RecyclerView SearchResultsRecyclerView;
     private static final String TAG = "Bus_Routes_";
     String CurentLocLatLng;
+    ImageView backbutton;
     String Origin;
     BusStop DestinationBusStop;
     private DatabaseReference dbr;
@@ -106,6 +108,8 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus__routes__search__result);
+        backbutton=(ImageView)findViewById(R.id.backarrow2);
+        backbutton.bringToFront();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:src="@android:color/transparent"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorSecondarylight"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp" />
 
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:src="@android:color/transparent"
             android:visibility="invisible"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorSecondarylight"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp" />
 
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:elevation="6dp"
-        app:backgroundTint="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorSecondary"
         app:pressedTranslationZ="12dp"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_input_add"

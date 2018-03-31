@@ -15,6 +15,7 @@
     <color name="colorBlack">#2b2a2a</color>
     <!--<color name="neworange">#005E7C</color>-->
     <color name="colorSecondary">#c1403d</color>
+    <color name="colorSecondarylight">#c64b46</color>
 </resources>
 
 
