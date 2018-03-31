@@ -43,16 +43,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="60dp"
                 android:text="ETA"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/EtaTime"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:text="2 min"
                 android:textSize="18sp" />

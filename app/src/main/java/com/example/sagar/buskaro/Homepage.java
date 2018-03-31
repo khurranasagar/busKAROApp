@@ -2,7 +2,11 @@ package com.example.sagar.buskaro;
 
 import android.content.Intent;
 import android.net.Uri;
+
+import com.firebase.ui.auth.AuthUI;
+
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +20,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -145,7 +154,24 @@ public class Homepage extends AppCompatActivity
 
         }else if(id == R.id.nav_logout){
 
-        }
+//            firebaseAuth.getInstance().signOut();
+            AuthUI.getInstance()
+                    .signOut(Homepage.this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>(){
+
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            // do something here
+                            startActivity(new Intent(Homepage.this,SignIn.class));
+                            finish();
+
+                        }
+                    });
+
+            }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

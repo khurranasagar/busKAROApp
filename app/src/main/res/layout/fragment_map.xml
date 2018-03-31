@@ -17,7 +17,7 @@
         map:uiCompass = "false" />
 
 
-    <EditText
+    <Button
         android:id="@+id/button3"
         android:drawableLeft="@drawable/square_7bit"
         android:drawableRight="@drawable/search3"

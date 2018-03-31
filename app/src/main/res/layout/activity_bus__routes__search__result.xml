@@ -26,8 +26,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:clickable="true"
+            android:elevation="10dp"
             android:onClick="backbutton"
-            app:srcCompat="@drawable/backarrow" />
+            app:srcCompat="@drawable/backarrow2" />
 
     </FrameLayout>
 

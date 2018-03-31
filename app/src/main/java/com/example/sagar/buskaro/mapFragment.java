@@ -96,7 +96,7 @@ public class mapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
 
         View v = inflater.inflate(R.layout.fragment_map, container, false);
-        EditText b1=(EditText)v.findViewById(R.id.button3);
+        Button b1=(Button)v.findViewById(R.id.button3);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
