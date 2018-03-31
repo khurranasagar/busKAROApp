@@ -81,7 +81,7 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
     List<Routedesc_getters> routedescgettersList;
     ImageView backbutton;
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
+    private static final String GOOGLE_API_KEY = "AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU";
     private DirectionFinderListener listener;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
@@ -282,11 +282,11 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
 
 
             Log.d("ETAS", "parseJSon: " + ETAs.size());
+            index--;
             if (index >= 0) {
                 String hello = all_station.get(index);
                 String hel[] = hello.split("\\.");
                 sendRequest(origin, hel[1]);
-                index--;
             }
 
             if (index < 0) {
@@ -495,7 +495,7 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
                     builderSingle.show();
                 }
                 else{
-                    ETATextView.setText(ET.get(ET.size() - idx));
+                    ETATextView.setText(ET.get(ET.size() - idx-1));
 
                 }
             }
@@ -545,6 +545,11 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
                 nam = hello.split("\\.");
             }
 
+
+
+
+
+
              Log.d("INDEX VALUE", "onDataChange: " + index);
 
             // If origin not present popup
@@ -552,14 +557,16 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
 //            for(int j=index-1;j>=0;j--)
 //            {
 
-                for(int g=0;g<(length-index - 1);g++)
+                for(int g=0;g<(length-index-1);g++)
                 {
                 ETAs.add(globall++,"NA");
                 }
 
                  Thread.sleep(2000);
-                String end_ETA = all_stations.get(index-2);
+                index = index-1;
+                String end_ETA = all_stations.get(index);
                 String lol[] = end_ETA.split("\\.");
+                ETAs.add(globall++,"0 mins");
                 sendRequest(start_Address_ETA,lol[1]);
 
 //                Thread.sleep(2000);

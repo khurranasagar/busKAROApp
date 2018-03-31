@@ -73,7 +73,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
     String bustowards[];
 
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
+    private static final String GOOGLE_API_KEY = "AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU";
     private DirectionFinderListener listener;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
@@ -229,6 +229,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
 
 
     private void parseJSon(String data) throws JSONException {
+
         Log.d("IN MAPSA WALA PARSE", "HEKKKII: ");
 
         if (data == null)
@@ -265,8 +266,11 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
 
             }
 
-            int ijk = route_names.indexOf(bus_number);
             Log.d("GAAAAA", "parseJSon: " + bus_number + " " + bus_towards);
+
+
+            int ijk = route_names.indexOf(bus_number);
+
             String numberbc = route_names.get(i);
             String key1 = key.get(ijk);
 

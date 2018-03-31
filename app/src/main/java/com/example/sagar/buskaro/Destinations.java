@@ -55,7 +55,7 @@ import Modules.Route;
 
 public class Destinations extends AppCompatActivity {
     private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-    private static final String GOOGLE_API_KEY = "AIzaSyDnwLF2-WfK8cVZt9OoDYJ9Y8kspXhEHfI";
+    private static final String GOOGLE_API_KEY = "AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU";
     private DirectionFinderListener listener;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
@@ -211,13 +211,11 @@ public class Destinations extends AppCompatActivity {
                 }
 
 
-
-
-
             }
 
 
         }
+
 
         if(nearest_busstop != null) {
             String[] busstop = nearest_busstop.split(" to ");
@@ -432,7 +430,7 @@ public class Destinations extends AppCompatActivity {
 //                new Dest2(R.drawable.favorite2,"Rajiv Chowk","611A","Dhaula Kuan")
 //        );
 
-//        sendRequest();
+        sendRequest();
 
         adapter2 = new DestAdapter(this, destlist,neareststop, origin,AllRoutes);
 
