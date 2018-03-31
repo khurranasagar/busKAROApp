@@ -108,17 +108,21 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
         backbutton=(ImageView)findViewById(R.id.backarrow);
         backbutton.bringToFront();
         firebaseauth = FirebaseAuth.getInstance();
-        origin = (String) getIntent().getStringExtra("Origin");
-        Log.d("Recieved_Origin", "onCreate: " + origin);
+        try{
+            origin = (String) getIntent().getStringExtra("Origin");
+            Log.d("Recieved_Origin", "onCreate: " + origin);
 
-        Log.d("Origin in RD.java", "onCreate: " + origin);
-        LatlngLocation = (String) getIntent().getStringExtra("LatLngCurrentLocation");
+            Log.d("Origin in RD.java", "onCreate: " + origin);
+            LatlngLocation = (String) getIntent().getStringExtra("LatLngCurrentLocation");
 
-        busroute = (BusRoutes) getIntent().getSerializableExtra("BusRoutes");
+            busroute = (BusRoutes) getIntent().getSerializableExtra("BusRoutes");}
+            catch (Exception e){
+            e.printStackTrace();
+            }
 
-        TextView BusnoTextView = (TextView) findViewById(R.id.Busno2);
-        TextView TowardsTextView = (TextView) findViewById(R.id.EndDestination2);
-        ETATextView = (TextView) findViewById(R.id.EtaTime2);
+            TextView BusnoTextView = (TextView) findViewById(R.id.Busno2);
+            TextView TowardsTextView = (TextView) findViewById(R.id.EndDestination2);
+            ETATextView = (TextView) findViewById(R.id.EtaTime2);
 
         BusnoTextView.setText(busroute.getBus_number());
         TowardsTextView.setText(busroute.getDestination());
@@ -320,33 +324,36 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        try {
+            Marker m1 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this, origin)).title(origin));
+            Marker m2 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this, busroute.getDestination())).title(busroute.getDestination()));
+            m1.showInfoWindow();
+            m2.showInfoWindow();
 
-        Marker m1 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this,origin)).title(origin));
-        Marker m2 = mMap.addMarker(new MarkerOptions().position(getLocationFromAddress(this,busroute.getDestination())).title(busroute.getDestination()));
-        m1.showInfoWindow();
-        m2.showInfoWindow();
+            List<Marker> markers = new ArrayList<>();
+            markers.add(m1);
+            markers.add(m2);
 
-        List<Marker> markers = new ArrayList<>();
-        markers.add(m1);
-        markers.add(m2);
-
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Marker marker : markers) {
-            builder.include(marker.getPosition());
-        }
-
-
-        final LatLngBounds bounds = builder.build();
-
-        int padding = 0; // offset from edges of the map in pixels
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Marker marker : markers) {
+                builder.include(marker.getPosition());
             }
-        });
+
+
+            final LatLngBounds bounds = builder.build();
+
+            int padding = 0; // offset from edges of the map in pixels
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+            mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                @Override
+                public void onMapLoaded() {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public LatLng getLocationFromAddress(Context context, String strAddress) {

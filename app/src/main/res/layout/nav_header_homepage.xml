@@ -19,7 +19,6 @@
         android:layout_gravity="center"
         android:id="@+id/credid"
         android:text="7 credits"
-        android:id="@+id/creditid"
         android:textAlignment="textEnd"
         android:textSize="14sp"
         tools:ignore="RtlCompat" />
