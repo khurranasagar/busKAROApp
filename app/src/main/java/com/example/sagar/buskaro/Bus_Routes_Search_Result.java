@@ -136,13 +136,9 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
         key.add("-L8bGaUG6Zja4Lvd4AhJ");
         key.add("-L8bPAYu2rAdR3ZbwyMv");
 
-
         route_names = new ArrayList<>();
         route_names.add("445A");
         route_names.add("445STL");
-
-
-
 
         adapter2 = new RoutesAdapter(this, routes_names, Origin, CurentLocLatLng, DestinationBusStop);
 
@@ -290,7 +286,7 @@ public class Bus_Routes_Search_Result extends FragmentActivity implements OnMapR
                 @Override
 
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Log.d("GGGG", "onDataChange: " + dataSnapshot.toString());
+//                    Log.d("GGGG", "onDataChange: " + dataSnapshot.toString());
                     int temp=0;
                     all_station = new ArrayList<>();
                     for(DataSnapshot helll : dataSnapshot.getChildren()){

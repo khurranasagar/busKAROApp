@@ -99,6 +99,7 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
     List<String> all_station;
     TextView ETATextView;
 
+    int all_time = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +182,7 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
     private String createUrl(String origin,String destination) throws UnsupportedEncodingException {
         String urlOrigin = URLEncoder.encode(origin, "utf-8");
         String urlDestination = URLEncoder.encode(destination, "utf-8");
-        String URL = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination +"&mode=transit&transit_mode=bus"  +"&key=" + GOOGLE_API_KEY;
+        String URL = DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination +"&key=" + GOOGLE_API_KEY;
         Log.d("URL ", "createUrl: " + URL);
         Log.d("FIND ETAS KE LEI", "createUrl: ");
         return URL;
@@ -289,15 +290,24 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
             JSONObject jsonDistance = jsonLeg.getJSONObject("distance");
             JSONObject jsonDuration = jsonLeg.getJSONObject("duration");
             String json_time = jsonLeg.getJSONObject("duration").getString("text");
-            ETAs.add(globall++, json_time);
+            String add_time[] = json_time.split(" ");
+            Log.d(TAG, "parseJSon: " + add_time[1]);
+            int smarty = Integer.parseInt(add_time[0]);
 
-
+            int smart = smarty + all_time;
+            all_time = smart;
+            String helll = Integer.toString(smart);
+            String nemo = helll.concat(" mins");
+            ETAs.add(globall++, nemo);
             Log.d("ETAS", "parseJSon: " + ETAs.size());
+
             index--;
             if (index >= 0) {
+                String origin = all_station.get(index+1);
+                String katy[] = origin.split("\\.");
                 String hello = all_station.get(index);
                 String hel[] = hello.split("\\.");
-                sendRequest(origin, hel[1]);
+                sendRequest(katy[1], hel[1]);
             }
 
             if (index < 0) {
@@ -521,15 +531,6 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
             }
 
 
-//            int length = stops.size();
-//            String start_Address_ETA = origin;
-//            int i = 0;
-//            String h = stops.get(i).getStopname();
-//            while(i < length && !(h.)){
-//                i++;
-//                hello = all_station.get(i);
-//            }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -571,16 +572,7 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
             }
 
 
-
-
-
-
              Log.d("INDEX VALUE", "onDataChange: " + index);
-
-            // If origin not present popup
-
-//            for(int j=index-1;j>=0;j--)
-//            {
 
                 for(int g=0;g<(length-index-1);g++)
                 {
@@ -593,11 +585,6 @@ public class Route_Description extends AppCompatActivity implements OnMapReadyCa
                 String lol[] = end_ETA.split("\\.");
                 ETAs.add(globall++,"0 mins");
                 sendRequest(start_Address_ETA,lol[1]);
-
-//                Thread.sleep(2000);
-//            }
-
-
 
         }
 
